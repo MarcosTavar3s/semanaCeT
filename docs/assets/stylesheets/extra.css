@@ -1,0 +1,9 @@
+/* Torna a imagem circular e adiciona uma borda com o tom roxo/rosa do Dracula */
+img.circular, 
+img.avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 150px;  /* Ajuste a largura conforme preferir */
+    height: 150px; /* Deve ser idêntico à largura para manter a proporção */
+    border: 3px solid #ff79c6; /* Rosa clássico do Dracula (opcional) */
+}

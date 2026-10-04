@@ -1,0 +1,18 @@
+site_name: BootCamp - Visão Computacional + IA na prática
+theme:
+    name: dracula
+
+nav:
+  - Início: index.md
+  - Fundamentos de imagens digitais: dia01.md
+  - Modelos de Visão Computacional: dia02.md
+  - Agentes + Visão Computacional: dia03.md
+  - Contatos: contatos.md
+  
+extra_css:
+  - assets/stylesheets/extra.css
+
+markdown_extensions:
+  - attr_list
+
+copyright: 'Desenvolvido por <a href="https://seu-site.com" target="_blank">Seu Nome</a>'
