@@ -1,9 +1,51 @@
-/* Torna a imagem circular e adiciona uma borda com o tom roxo/rosa do Dracula */
-img.circular, 
-img.avatar {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 150px;  /* Ajuste a largura conforme preferir */
-    height: 150px; /* Deve ser idêntico à largura para manter a proporção */
-    border: 3px solid #ff79c6; /* Rosa clássico do Dracula (opcional) */
+/* ==========================================================================
+   TEMA: DO FUNDO DO OCEANO AOS CONFINS DO ESPAÇO
+   Estilização elegante, imersiva e ultraleve para MkDocs (GitHub Pages)
+   Paleta: Abismo Oceânico, Bioluminescência Ciano, Poeira Estelar e Nebulosa Violeta
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIÁVEIS DO SISTEMA & CORES CÓSMICO-OCEÂNICAS
+   -------------------------------------------------------------------------- */
+:root {
+  /* Sobrescrevendo variáveis internas do tema simple-blog */
+  /* --text: #e2e8f0; */
+  --text: black;
+  /* --title: #f8fafc; */
+  --title: #0f0f0f;
+  --primary: #06e4d9;
+  /* --background: #032125; */
+  /* --code-bg: #020713; */
+  --code-fg: #0c4b66;
+  --color-black: #020617;
+  --color-white: #ffffff;
+  --color-gray: #94a3b8;
+  --color-blue: #38bdf8;
+  --color-purple: #c084fc;
 }
+
+/* --------------------------------------------------------------------------
+   2. CORPO GLOBAL & BACKGROUND IMERSIVO
+   -------------------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-size: 1.5rem !important;
+  line-height: 1.75 !important;
+  letter-spacing: normal !important;
+}
+
+#component-title{
+  visibility: hidden;
+  font-size: 0px;
+  height: 0px;
+}
+
+a{
+  color:#0c4b66 !important;
+}
+

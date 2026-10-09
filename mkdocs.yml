@@ -1,18 +1,27 @@
 site_name: BootCamp - Visão Computacional + IA na prática
 theme:
-    name: dracula
-
+    name: simple-blog
+    # custom_dir: "custom_theme/"
 nav:
   - Início: index.md
-  - Fundamentos de imagens digitais: dia01.md
-  - Modelos de Visão Computacional: dia02.md
-  - Agentes + Visão Computacional: dia03.md
+  - Material: 
+    - Fundamentos de imagens digitais: dia01.md
+    - Modelos de Visão Computacional: dia02.md
+    - Agentes + Visão Computacional: dia03.md
   - Contatos: contatos.md
-  
+    
+plugins:
+  - awesome-pages
+
 extra_css:
   - assets/stylesheets/extra.css
-
+  
 markdown_extensions:
   - attr_list
+  - tables
+  - fenced_code
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
 
-copyright: 'Desenvolvido por <a href="https://seu-site.com" target="_blank">Seu Nome</a>'
+copyright: 'Desenvolvido por Marcos Aurélio Tavares Filho.'
