@@ -1,7 +1,9 @@
 site_name: BootCamp - Visão Computacional + IA na prática
 theme:
     name: simple-blog
-    # custom_dir: "custom_theme/"
+    features:
+      - content.code.copy
+
 nav:
   - Início: index.md
   - Material: 

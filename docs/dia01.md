@@ -9,7 +9,7 @@
 <div style="inline-flex">
 <a href="https://colab.new" target="_blank"><img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Google Colab"></a>
 <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
-<img src="https://img.shields.io/badge/Pillow-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Pillow">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
 <img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
 </div>
 
@@ -70,7 +70,10 @@ Toda imagem é composta por pixels (picture element), a menor unidade de represe
     * **Descrição / Aplicação:** Separa luminosidade da cor. Transmissão e compressão de vídeo/JPEG.
 
 
-**Observação:** maior quantidade de canais -> maior quantidade de informações -> maior demanda de memória. 
+![alt text](assets/images/escalas_de_cor.png)
+
+
+<p style="text-align:center"><strong>Observação:</strong> maior quantidade de canais -> maior quantidade de informações -> maior demanda de memória. </p>
 
 
 - **Filtros:** operações realizadas para modificar as características da imagem. São usados para atenuar, acentuar, detectar bordas, entre outras.
@@ -107,7 +110,7 @@ Toda imagem é composta por pixels (picture element), a menor unidade de represe
     * **Vetorização / Posterizar:** Reduz o número de cores únicas da imagem, agrupando gradientes em blocos de cor sólida.
     * **Vinheta:** Escurece gradualmente as bordas externas da imagem para focar a atenção no centro.
 
-- **Máscaras:** pequenas matrizes ou imagens usadas para modificar uma região. Utilzadas para destacar uma região dentro de uma imagem maior.
+- **Máscaras:** pequenas matrizes ou imagens usadas para modificar uma região. Utilzadas para selecionar uma região dentro de uma imagem maior.
 
 <img src="/assets/images/mascara.jpeg" alt="" style="display:flex; justify-text:center">
 
@@ -115,11 +118,58 @@ Toda imagem é composta por pixels (picture element), a menor unidade de represe
 
 ---
 ### Práticas propostas
-
 ---
 
-1. Abrir uma imagem, checar a resolução e a quantidade de canais.
-2. B
+Esse material adota a biblioteca OpenCV como referência, caso queira utilizar o Pillow, pesquise os comandos equivalentes em <a href="https://codoraven.com/category/tutorials/opencv-vs-pillow/" target="_blank"> CodoRaven</a>.
+
+1. Importar o OpenCV, abrir uma imagem, checar a resolução e a quantidade de canais.
+```python
+# Importacao do opencv
+import cv2
+
+# Abertura da imagem
+img = cv2.imread('caminho_da_imagem')
+
+print('OpenCV '+'='*30)
+print(f'Resolucao da imagem: ({img.shape[0]}, {img.shape[1]})')
+print(f'Quantidade de canais: {img.shape[2]}') 
+print('='*37)
+
+```
+2. Converter a imagem para outras escalas de cores
+```python
+# Uso do matplotlib para visualizar as imagens
+import matplotlib.pyplot as plt
+
+# RGB
+img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+# Escala de cinza
+img_cinza = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# HSV
+img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+# Visualizacao das imagens
+fig, ax = plt.subplots(2,2, figsize=(20, 12))
+ax[0][0].set_title('OpenCV')
+ax[0][0].imshow(img)
+
+ax[1][0].set_title('RGB')
+ax[1][0].imshow(img_rgb)
+
+ax[0][1].set_title('Cinza')
+ax[0][1].imshow(img_cinza, cmap='gray')
+
+ax[1][1].set_title('HSV')
+ax[1][1].imshow(img_hsv)
+
+fig.suptitle('Escalas de cores')
+plt.tight_layout()
+plt.show()
+```
+
+3. 
 
 ---
 ### 💭 Para ir mais a fundo....
@@ -130,20 +180,11 @@ Toda imagem é composta por pixels (picture element), a menor unidade de represe
 
 #### Prompts para utilizar em LLMs:
 
-<div class="divs">
-
 Explique como uma imagem digital monocromática e uma colorida são representadas matematicamente na memória (como matrizes/tensores). Aborde os conceitos de amostragem espacial (resolução espacial) e quantização de intensidade (resolução em tons de cinza ou profundidade de bits), detalhando o impacto de cada um na perda ou preservação de detalhes visuais.
-
-<br/><br/>
 
 Explique o funcionamento dos canais de cor em imagens digitais. Compare o espaço de cores RGB com o HSV (ou HSL) e o CIELAB, explicando em quais cenários de visão computacional ou tratamento de imagem é mais vantajoso converter uma imagem de RGB para HSV ou para tons de cinza (grayscale).
 
-<br/><br/>
 
 Explique o conceito de máscaras binárias e operações morfológicas básicas em processamento de imagens (Erosão, Dilatação, Abertura e Fechamento). 
 
-<br/><br/>
-
 Explique intuitivamente e matematicamente como cada uma dessas quatro operações altera os pixels de uma imagem binarizada e dê exemplos clássicos de uso.
-
-</div>
