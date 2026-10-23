@@ -25,7 +25,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="../assets/images/joao.jpg" class="contact-img">
+    <img src="../assets/images/joao.jpeg" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>João Victor Evangelista</p>
         <ul> > Monitor.</ul>
@@ -37,7 +37,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="../assets/images/thamyres.jpg" class="contact-img">
+    <img src="../assets/images/thamyres.jpeg" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>Sara Thamyres</p>
         <ul> > Monitora.</ul>
