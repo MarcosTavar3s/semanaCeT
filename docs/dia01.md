@@ -23,7 +23,7 @@
 Toda imagem digital é composta por <strong>pixels</strong> (<em>picture elements</em>), a menor unidade de representação visual computacional. Na prática, <strong>uma imagem é representada na memória como uma matriz (ou tensor) de valores numéricos</strong>, em que cada posição guarda a intensidade luminosa ou de cor daquele ponto.
 </p>
 
-<img src="/assets/images/pixels.jpeg" alt="Imagem didática dividida em duas partes com fundo de um recife de corais desfocado. À esquerda, há um painel rotulado Imagem Original de Alta Resolução que exibe uma cena subaquática nítida com corais coloridos, um peixe e bolhas de ar, destacando uma área delimitada por um quadrado branco. Uma seta aponta desse quadrado para a direita, indicando a extração do elemento. À direita, vê-se uma amostra ampliada de um pixel de cor azul sólido, acompanhada pelo texto descritivo Amostra do Pixel Extraído e uma pequena representação de uma grade de pixels (Local de Origem - Mapa de Bits 1x1) apontando exatamente de onde ele veio.">
+<img src="../assets/images/pixels.jpeg" alt="Imagem didática dividida em duas partes com fundo de um recife de corais desfocado. À esquerda, há um painel rotulado Imagem Original de Alta Resolução que exibe uma cena subaquática nítida com corais coloridos, um peixe e bolhas de ar, destacando uma área delimitada por um quadrado branco. Uma seta aponta desse quadrado para a direita, indicando a extração do elemento. À direita, vê-se uma amostra ampliada de um pixel de cor azul sólido, acompanhada pelo texto descritivo Amostra do Pixel Extraído e uma pequena representação de uma grade de pixels (Local de Origem - Mapa de Bits 1x1) apontando exatamente de onde ele veio.">
 
 Para manipular imagens via código, precisamos compreender quatro conceitos fundamentais: **resolução**, **canais e escalas de cores**, **filtros** e **máscaras**.
 
@@ -144,7 +144,7 @@ O termo **máscara** aparece em dois contextos complementares no processamento d
 1. **Máscara de Região (ROI / Recorte Binário):** Uma imagem em preto e branco (0 e 255) de mesma resolução usada para selecionar quais pixels serão mantidos ou editados (região branca) e quais serão ocultados ou ignorados (região preta).
 2. **Máscara de Convolução (Kernel):** Uma pequena matriz (ex.: $3\times3$ ou $5\times5$) que desliza sobre a imagem para calcular borramento, nitidez ou bordas.
 
-<img src="/assets/images/mascara.jpeg" alt="Ilustração do uso de máscara em uma imagem para isolar uma região de interesse" style="display:flex; justify-text:center">
+<img src="../assets/images/mascara.jpeg" alt="Ilustração do uso de máscara em uma imagem para isolar uma região de interesse" style="display:flex; justify-text:center">
 
 ---
 

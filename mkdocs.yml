@@ -1,4 +1,5 @@
 site_name: BootCamp - Visão Computacional + IA na prática
+site_url: https://marcostavar3s.github.io/semanaC-T/
 theme:
     name: simple-blog
     features:

@@ -2,7 +2,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="/assets/images/marcos.jpg" class="contact-img">
+    <img src="../assets/images/marcos.jpg" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>Marcos Aurélio Tavares Filho</p>
         <ul> > Ministrante do minicurso.</ul>
@@ -13,7 +13,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="/assets/images/helton.png" class="contact-img">
+    <img src="../assets/images/helton.png" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>Helton Maia</p>
         <ul> > Professor responsável.</ul>
@@ -25,7 +25,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="/assets/images/helton.png" class="contact-img">
+    <img src="../assets/images/helton.png" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>João Victor Evangelista</p>
         <ul> > Monitor.</ul>
@@ -37,7 +37,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="/assets/images/helton.png" class="contact-img">
+    <img src="../assets/images/helton.png" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>Sara Thamyres</p>
         <ul> > Monitor.</ul>

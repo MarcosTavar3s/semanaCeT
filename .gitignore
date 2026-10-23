@@ -8,5 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
-.python-version
-pyproject.toml
+venv/
+
+# MkDocs build output
+site/

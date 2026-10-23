@@ -18,7 +18,7 @@ O agente pode combinar modelos de aprendizado de máquina, regras e funções Py
 
 Um **bot** automatiza interações ou tarefas, geralmente por comandos ou regras. Um **agente** seleciona ações de acordo com o objetivo e as observações disponíveis. Os conceitos não são excludentes: um bot pode fazer parte de um sistema agente.
 
-<img src="/assets/images/bot_vs_agente_recife.png" alt="">
+<img src="../assets/images/bot_vs_agente_recife.png" alt="">
 
 
 ---
@@ -40,7 +40,7 @@ MCP não é um modelo de IA nem escolhe sozinho as ferramentas: a decisão cabe 
 ### Níveis de autonomia de agentes de IA
 
 ---
-<img src="/assets/images/niveis_autonomia_agentes_ia.png" alt="">
+<img src="../assets/images/niveis_autonomia_agentes_ia.png" alt="">
 
 
 
