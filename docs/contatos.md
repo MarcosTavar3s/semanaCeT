@@ -25,7 +25,7 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="../assets/images/helton.png" class="contact-img">
+    <img src="../assets/images/joao.jpg" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>João Victor Evangelista</p>
         <ul> > Monitor.</ul>
@@ -37,12 +37,12 @@
 
 <div> 
 <div style="display:inline-flex;">
-    <img src="../assets/images/helton.png" class="contact-img">
+    <img src="../assets/images/thamyres.jpg" class="contact-img">
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>Sara Thamyres</p>
-        <ul> > Monitor.</ul>
-        <ul> > Email: <a href="mailto:">PREENCHER. </a></ul>
-        <ul> > LinkedIn: <a href="" target="_blank">PREENCHER.</a></ul>
+        <ul> > Monitora.</ul>
+        <ul> > Email: <a href="mailto:sara.santana.103@ufrn.edu.br">sara.santana.103@ufrn.edu.br. </a></ul>
+        <ul> > LinkedIn: <a href="https://www.linkedin.com/in/sara-thamyres" target="_blank">Sara Thamyres.</a></ul>
     </div>
 </div>
 
