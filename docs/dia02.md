@@ -89,11 +89,11 @@ Imagem de Entrada ──► [ Convolução + ReLU ] ──► [ Pooling ] ──
 
 ---
 
-### 🎯 3. Tarefas da Visão Computacional
+### 🎯 3. Tarefas e Ecossistema de Modelos de Visão Computacional
 
 ---
 
-Com base nas características extraídas pelas CNNs, os modelos modernos de visão computacional podem realizar diferentes tarefas dependendo do que precisamos responder sobre a cena:
+Com base nas características extraídas pelas redes neurais, os modelos modernos de visão computacional podem realizar diferentes tarefas dependendo do que precisamos responder sobre a cena:
 
 === "Classificação"
 
@@ -119,21 +119,134 @@ Com base nas características extraídas pelas CNNs, os modelos modernos de vis�
     * **Saída:** Coordenadas de **pontos-chave (*keypoints*)** conectados (como ombros, cotovelos, joelhos).
     * **Exemplo:** Análise de movimentos esportivos, ergonomia e detecção de quedas.
 
+#### 🔄 A Pipeline Geral de um Modelo de Visão Computacional
+
+Independentemente da arquitetura escolhida, quase todo sistema moderno de visão computacional segue uma **pipeline padronizada de 4 etapas**, conectando os conceitos que vimos no **Dia 01** (matrizes e filtros) à inteligência artificial:
+
+```text
+┌───────────────────┐    ┌───────────────────────┐    ┌────────────────────┐    ┌────────────────────┐
+│  1. Entrada &     │    │  2. Extração (Rede)   │    │  3. Cabeça (Head)  │    │ 4. Pós-processam.  │
+│ Pré-processamento │ ──►│   Backbone + Neck     │ ──►│  Predição da Tarefa│ ──►│ Filtragem e Saída  │
+└───────────────────┘    └───────────────────────┘    └────────────────────┘    └────────────────────┘
+ • Redimensionamento      • Convoluções / Atenção      • Classes (Softmax)       • Limiar (Threshold)
+ • Conversão BGR→RGB      • Mapas de características   • Caixas (x, y, w, h)     • Remoção duplicatas
+ • Normalização [0,1]     • Fusão multi-escala         • Máscaras / Keypoints    • Coordenadas finais
+```
+
+1. **Pré-processamento (*Pre-processing*):** A imagem bruta precisa ser padronizada antes de entrar na rede:
+   * **Redimensionamento (*Resize / Letterbox*):** Ajuste para um tamanho fixo esperado pela rede (ex.: $224\times224$ ou $640\times640$).
+   * **Normalização:** Conversão dos pixels de inteiros (`0` a `255`) para ponto flutuante (`0.0` a `1.0`) e organização no formato de tensor $(B, C, H, W)$ — *Batch, Canais, Altura, Largura*.
+2. **Extração e Fusão de Características (*Backbone & Neck*):**
+   * **Backbone ("Espinha Dorsal"):** É o extrator visual (geralmente uma CNN ou Transformer) que comprime a imagem espacialmente enquanto extrai mapas de características de baixo, médio e alto nível.
+   * **Neck ("Pescoço"):** Presente em detectores e segmentadores, combina características de diferentes camadas para que o modelo enxergue tanto **objetos pequenos** (detalhes finos das camadas iniciais) quanto **objetos grandes** (contexto global das camadas profundas).
+3. **Cabeça de Predição (*Head*):** Camadas finais que consomem as características processadas e geram os números brutos da tarefa (probabilidades de classe, coordenadas de caixas, máscaras de pixels ou pontos de articulação).
+4. **Pós-processamento (*Post-processing*):** Traduz os tensores matemáticos da rede em resultados úteis para o mundo real — descartando previsões de baixa certeza (*Confidence Threshold*), eliminando caixas duplicadas (*NMS*) e reescalando as coordenadas de volta para a resolução original da foto/vídeo.
+
+#### 🏛️ Principais Famílias de Modelos de Visão Computacional
+
+Além do YOLO, o ecossistema de Visão Computacional conta com diferentes famílias de arquiteturas, cada uma otimizada para um cenário:
+
+=== "CNNs Clássicas (Classificação)"
+
+    Focadas em classificar imagens ou servir como *Backbone* para outros modelos:
+
+    * **ResNet (*Residual Networks*):** Introduziu as *skip connections* (atalhos residuais), permitindo treinar redes muito profundas sem perder o sinal do gradiente.
+    * **MobileNet / EfficientNet:** Arquiteturas leves projetadas para rodar em celulares, Raspberry Pi e dispositivos de borda (*Edge AI*) com baixo consumo de bateria.
+
+=== "Detectores de Dois Estágios (Two-Stage)"
+
+    Dividem a detecção em duas fases: **(1)** propor regiões onde pode haver um objeto (*Region Proposal Network*) e **(2)** classificar e refinar cada região.
+
+    * **Exemplos:** **Faster R-CNN**, **Mask R-CNN**.
+    * **Perfil:** Altíssima precisão em cenários densos ou complexos, porém **mais lentos** (menor taxa de FPS), sendo menos usados em vídeo ao vivo.
+
+=== "Detectores de Estágio Único (Single-Stage)"
+
+    Olham para a imagem inteira de uma só vez, prevendo posições e classes simultaneamente em uma única passagem (*forward pass*).
+
+    * **Exemplos:** **YOLO** (*You Only Look Once*), **SSD** (*Single Shot MultiBox Detector*), **RetinaNet**.
+    * **Perfil:** Excelente equilíbrio entre **velocidade em tempo real** e alta precisão.
+
+=== "Segmentação Dedicada"
+
+    Arquiteturas no formato **Encoder-Decoder** (comprimem a imagem para entender o contexto e depois a reconstroem na resolução original para rotular pixel a pixel).
+
+    * **U-Net:** Padrão ouro em imagens médicas e de satélite (funciona muito bem mesmo com poucos dados de treino).
+    * **SAM (*Segment Anything Model* - Meta):** Modelo fundacional (*Foundation Model*) capaz de segmentar qualquer objeto zero-shot a partir de um clique, caixa ou texto.
+
+=== "Vision Transformers (ViT & Multimodal)"
+
+    Trouxeram o mecanismo de **Atenção (*Self-Attention*)** — o mesmo dos LLMs como o GPT — para as imagens, dividindo a foto em pequenos blocos (*patches* de $16\times16$ pixels).
+
+    * **ViT (*Vision Transformer*):** Relaciona partes distantes da imagem desde a primeira camada.
+    * **DETR / RT-DETR:** Detectores baseados em Transformers que eliminam a necessidade de pós-processamento manual como o NMS.
+    * **CLIP (OpenAI):** Conecta **Visão + Linguagem**, permitindo buscar ou classificar imagens usando descrições em texto livre sem precisar retreinar o modelo.
+
 ---
 
-### ⚡ 4. YOLO: Detecção de Imagens em Tempo Real
+### ⚡ 4. YOLO: Arquitetura e Pipeline em Tempo Real
 
 ---
 
-Antigamente, para detectar objetos em uma imagem, os algoritmos funcionavam em **duas etapas lentas**: primeiro recortavam milhares de regiões candidatas na imagem e depois passavam uma CNN classificadora em cada recorte. Isso inviabilizava o uso em vídeos ao vivo.
+Antigamente, para detectar objetos em uma imagem, os algoritmos funcionavam em **duas etapas lentas** (como a família R-CNN): primeiro recortavam milhares de regiões candidatas na imagem e depois passavam uma CNN classificadora em cada recorte. Isso inviabilizava o uso em vídeos ao vivo.
 
-Em 2016, surgiu o **YOLO** (*You Only Look Once* — *"Você Só Olha Uma Vez"*), revolucionando a área ao transformar a detecção em uma **única passagem pela rede neural**.
+Em 2016, surgiu o **YOLO** (*You Only Look Once* — *"Você Só Olha Uma Vez"*), revolucionando a área ao transformar a detecção em um problema de regressão resolvido em uma **única passagem pela rede neural**.
 
-#### Como o YOLO pensa? (Ideia Central Simplificada)
+#### 🔬 A Pipeline Completa do YOLO (Passo a Passo)
+
+Quando chamamos `modelo.predict(imagem)` no YOLO moderno (como YOLOv8 ou YOLO11), a imagem percorre um fluxo altamente otimizado dividido em **Pré-processamento**, **Arquitetura Interna (Backbone → Neck → Head)** e **Pós-processamento**:
+
+```text
+[ Imagem Original ]
+        │
+        ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 1. PRÉ-PROCESSAMENTO: Letterbox Resize (ex: 640×640) + Normalização RGB │
+└─────────────────────────────────────────────────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 2. REDE NEURAL YOLO (Forward Pass Único)                                │
+│                                                                         │
+│   ┌──────────────┐       ┌──────────────┐       ┌───────────────────┐   │
+│   │   BACKBONE   │       │     NECK     │       │   DECOUPLED HEAD  │   │
+│   │  (CSPDarknet)│ ────► │ (FPN + PANet)│ ────► │  (3 Escalas: P3,  │   │
+│   │ Extrai mapas │       │ Funde escalas│       │     P4 e P5)      │   │
+│   └──────────────┘       └──────────────┘       └───────────────────┘   │
+└─────────────────────────────────────────────────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 3. SAÍDAS BRUTAS EM MÚLTIPLAS ESCALAS (Grid S × S)                      │
+│   • Ramo de Regressão: Coordenadas das caixas (x, y, w, h)              │
+│   • Ramo de Classificação: Probabilidades das classes + Confiança       │
+└─────────────────────────────────────────────────────────────────────────┘
+        │
+        ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│ 4. PÓS-PROCESSAMENTO: Filtro de Confiança + Cálculo de IoU + NMS        │
+└─────────────────────────────────────────────────────────────────────────┘
+        │
+        ▼
+[ Detecções Finais: Caixas, Classes e Confiança na imagem original ]
+```
+
+##### Etapa 1: Pré-processamento Inteligente (*Letterbox*)
+Em vez de "espremer" e distorcer uma imagem retangular (ex.: $1920\times1080$) para caber em um quadrado ($640\times640$), o YOLO aplica o **Letterbox**: redimensiona mantendo a proporção original do objeto e preenche as bordas que sobram com barras cinzas neutras, além de normalizar os pixels dividindo por $255$.
+
+##### Etapa 2: Por dentro da Rede (*Backbone*, *Neck* e *Head*)
+* **Backbone (*Espinha Dorsal*):** Usa blocos convolucionais avançados (como *CSP / C2f*) para extrair características visuais em diferentes profundidades.
+* **Neck (*Pescoço — FPN + PANet*):** Mistura informações de cima para baixo e de baixo para cima. Graças a isso, o YOLO envia **3 mapas de características em resoluções diferentes** para a etapa final:
+  * **Grade fina (ex.: $80\times80$):** Especialista em detectar **objetos pequenos** (ex.: um celular ou pássaro ao fundo).
+  * **Grade média (ex.: $40\times40$):** Especialista em **objetos médios** (ex.: uma pessoa a alguns metros).
+  * **Grade larga (ex.: $20\times20$):** Especialista em **objetos grandes** (ex.: um ônibus ocupando a tela).
+* **Head Desacoplada (*Decoupled Head*):** Nas versões modernas (YOLOv8+), a cabeça é dividida em dois ramos independentes: um focado exclusivamente em **localizar a caixa** $(x, y, w, h)$ e outro focado em **identificar a classe**, aumentando a precisão.
+
+##### Etapa 3: Divisão em Grade (*Grid*) e Previsão Simultânea
 
 ```text
 +---+---+---+
-|   |   |   |   1. Divide a imagem em uma grade (Grid S × S)
+|   |   |   |   1. Divide a imagem em grades (Grid S × S) em múltiplas escalas
 +---+---+---+   2. Cada célula prevê caixas (x, y, largura, altura),
 |   | ● |   |      confiança e probabilidades de classe simultaneamente!
 +---+---+---+   3. O NMS limpa as caixas duplicadas sobre o mesmo objeto.
@@ -141,15 +254,17 @@ Em 2016, surgiu o **YOLO** (*You Only Look Once* — *"Você Só Olha Uma Vez"*)
 +---+---+---+
 ```
 
-1. **Divisão em Grade (*Grid*):** O YOLO divide a imagem de entrada em uma grade (por exemplo, $S \times S$ células).
-2. **Previsão Simultânea:** Se o centro de um objeto cai dentro de uma célula da grade, aquela célula fica responsável por prever:
+1. **Divisão em Grade (*Grid*):** Em cada escala, a imagem é dividida em uma grade de células.
+2. **Previsão por Célula:** Se o centro de um objeto cai dentro de uma célula da grade, aquela célula fica responsável por prever:
    * As coordenadas da **Bounding Box**: centro $(x, y)$, largura $(w)$ e altura $(h)$;
-   * O **grau de confiança (*Confidence*)**: a certeza de que há um objeto ali;
+   * O **grau de confiança (*Confidence*)**: a certeza da detecção;
    * As **probabilidades de cada classe** (pessoa, carro, mochila, celular etc.).
-3. **Remoção de Duplicatas — NMS (*Non-Maximum Suppression*):**
-   * Como células vizinhas podem detectar o mesmo objeto, várias caixas acabam se sobrepondo.
-   * O YOLO calcula a métrica **IoU (*Intersection over Union*)**, que mede a área de sobreposição entre duas caixas.
-   * O algoritmo **NMS** mantém apenas a caixa com **maior confiança** e descarta as caixas redundantes que estão muito sobrepostas a ela.
+
+##### Etapa 4: Pós-processamento — Confiança, IoU e NMS (*Non-Maximum Suppression*)
+Como uma grade gera milhares de previsões candidatas e células vizinhas podem detectar o mesmo objeto, o pós-processamento limpa o resultado em três passos:
+1. **Filtro de Confiança (*Confidence Threshold*):** Descarta imediatamente todas as caixas cuja probabilidade esteja abaixo do limite definido (ex.: `conf < 0.40`).
+2. **Cálculo de IoU (*Intersection over Union*):** Mede o percentual de sobreposição entre duas caixas (área da interseção dividida pela área da união).
+3. **Supressão de Não-Máximos (*NMS*):** Ordena as caixas restantes da maior para a menor confiança. Mantém a caixa mais confiante e **elimina todas as outras caixas da mesma classe que tenham um IoU alto** (muita sobreposição) com ela.
 
 ```text
 Antes do NMS:                      Depois do NMS:
