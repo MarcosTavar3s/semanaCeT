@@ -1,0 +1,493 @@
+<!doctype html>
+<html data-bs-theme="">
+
+<head>
+    <title>Agentes + Visão Computacional - BootCamp - Visão Computacional + IA na prática
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://marcostavar3s.github.io/semanaC-T/dia03/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+
+    
+    
+    
+    <link href="../assets/stylesheets/extra.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">BootCamp - Visão Computacional + IA na prática</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Início]</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class=" active 
+                            nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Material]</a>
+                            <ul class="dropdown-menu">
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia01/" class="dropdown-item text-decoration-none ">Fundamentos de imagens digitais</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia02/" class="dropdown-item text-decoration-none ">Modelos de Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Agentes + Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../contatos/">[Contatos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main>
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Agentes + Visão Computacional</h1>
+            
+        </header>
+        
+        
+        
+        <p><h1 id="agentes-visao-computacional">Agentes + Visão Computacional</h1>
+<hr />
+<h3 id="ferramentas-utilizadas">🛠️ Ferramentas Utilizadas</h3>
+<hr />
+<div style="inline-flex">
+<a href="https://colab.new" target="_blank"><img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Google Colab"></a>
+<img src="https://img.shields.io/badge/Ultralytics%20YOLO-111F68?style=for-the-badge&logo=yolo&logoColor=white" alt="Ultralytics YOLO">
+<img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+<img src="https://img.shields.io/badge/MCP-000000?style=for-the-badge&logo=anthropic&logoColor=white" alt="Model Context Protocol">
+<img src="https://img.shields.io/badge/Telegram%20Bot%20API-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Bot API">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+</div>
+
+<hr />
+<h3 id="1-o-que-e-um-agente-de-ia">🤖 1. O que é um Agente de IA?</h3>
+<hr />
+<p>Nos <strong>Dias 01 e 02</strong>, aprendemos a manipular pixels e a utilizar modelos como o <strong>YOLO</strong> para detectar objetos em imagens e vídeos. Porém, um detector convencional apenas retorna dados brutos (caixas, classes e probabilidades). Como transformar essas detecções em <strong>tomada de decisão e ação no mundo real</strong>?</p>
+<p>É aqui que entra o conceito de <strong>Agente de IA</strong>: um sistema que <strong>observa</strong> um ambiente, <strong>processa</strong> informações e <strong>escolhe ações</strong> para alcançar um objetivo específico.</p>
+<pre class="highlight"><code class="language-text">┌────────────┐    ┌───────────────┐    ┌─────────┐    ┌──────┐    ┌───────────┐
+│ Observação │ ─► │ Interpretação │ ─► │ Decisão │ ─► │ Ação │ ─► │ Resultado │
+└────────────┘    └───────────────┘    └─────────┘    └──────┘    └───────────┘
+ (Imagem/Vídeo)    (YOLO + Regras)     (Política)     (Tools)     (Alerta/Log)</code></pre>
+<ul>
+<li><strong>Combinação de técnicas:</strong> Um agente pode combinar modelos de aprendizado de máquina (como redes neurais), regras de negócio e funções Python. <strong>Nem todo agente precisa usar um Modelo de Linguagem (LLM)</strong> — agentes baseados em regras ou políticas determinísticas são rápidos, previsíveis e amplamente usados na indústria.</li>
+<li><strong>Agente de Visão (<em>Vision Agent</em>):</strong> Utiliza imagens ou vídeos como <strong>observações</strong> do ambiente. Enquanto um detector comum apenas lista os objetos identificados, o agente de visão usa essas detecções para escolher verificações adicionais, acionar ferramentas externas e decidir o próximo passo.</li>
+</ul>
+<hr />
+<h3 id="2-bot-vs-agente-e-niveis-de-autonomia">⚖️ 2. Bot vs. Agente e Níveis de Autonomia</h3>
+<hr />
+<h4 id="bot-e-agente-qual-e-a-diferenca">Bot e Agente: qual é a diferença?</h4>
+<p>Um <strong>bot</strong> automatiza interações ou tarefas repetitivas, seguindo fluxos fixos acionados por comandos diretos ou gatilhos simples. Já um <strong>agente</strong> seleciona quais ações executar de acordo com o <strong>objetivo</strong> e as <strong>observações</strong> disponíveis no ambiente.</p>
+<blockquote>
+<p><strong>Importante:</strong> Os conceitos não são excludentes! Um <strong>bot</strong> (como um bot do Telegram) pode fazer parte de um sistema <strong>agente</strong>, atuando como o canal de comunicação ou ferramenta de notificação do agente.</p>
+</blockquote>
+<p><img src="../assets/images/bot_vs_agente_recife.png" alt="Comparativo visual entre Bot e Agente de IA"></p>
+<h4 id="niveis-de-autonomia-de-agentes-de-ia">Níveis de Autonomia de Agentes de IA</h4>
+<p>Dependendo de quanto controle o humano mantém sobre o sistema e de como o agente planeja suas ações, podemos classificar os agentes em diferentes <strong>níveis de autonomia</strong>:</p>
+<p><img src="../assets/images/niveis_autonomia_agentes_ia.png" alt="Níveis de autonomia de agentes de IA"></p>
+<p style="text-align: center;"> Artigo original: <a href="https://arxiv.org/html/2506.12469v1" target="_blank">Levels of Autonomy for AI Agents Working Paper.</a></p>
+
+<hr />
+<h3 id="3-model-context-protocol-mcp">🔌 3. Model Context Protocol (MCP)</h3>
+<hr />
+<p>Quando construímos agentes que precisam acionar diversas funções (consultar bancos de dados, verificar sensores, analisar imagens ou enviar mensagens), integrar cada ferramenta manualmente pode se tornar confuso.</p>
+<p>O <strong>Model Context Protocol (MCP)</strong> é um protocolo aberto que padroniza a forma como aplicações de IA descobrem e utilizam ferramentas (<em>tools</em>) e recursos disponibilizados por servidores compatíveis.</p>
+<pre class="highlight"><code class="language-text">┌───────────────────────────────────────────┐          ┌───────────────────────────┐
+│               Host (Colab)                │          │       Servidor MCP        │
+│  ┌─────────────────┐   ┌───────────────┐  │   MCP    │  • detectar_objetos()     │
+│  │ Agente / Código │◄─►│  Cliente MCP  │◄─┼─────────►│  • contar_objetos()       │
+│  └─────────────────┘   └───────────────┘  │          │  • verificar_condicao()   │
+└───────────────────────────────────────────┘          │  • enviar_alerta()        │
+                                                       └───────────────────────────┘</code></pre>
+<h4 id="componentes-da-arquitetura-mcp">Componentes da Arquitetura MCP:</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Host (Anfitrião)</label><label for="__tabbed_1_2">Cliente MCP</label><label for="__tabbed_1_3">Servidor MCP</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> É a aplicação principal que integra o modelo ou a política do agente e coordena toda a interação (por exemplo, o nosso notebook no Google Colab ou uma aplicação em produção).</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> Componente dentro do Host que mantém a conexão com o servidor MCP, consulta quais ferramentas estão disponíveis e solicita a execução de operações.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> Expõe ferramentas padronizadas (como funções Python decoradas) para que o cliente possa chamá-las de forma segura e estruturada.</li>
+</ul>
+</div>
+</div>
+</div>
+<blockquote>
+<p><strong>Atenção:</strong> O MCP <strong>não é um modelo de IA</strong> e não escolhe sozinho quais ferramentas usar. A decisão sempre cabe ao <strong>agente</strong> (seja via regras em código ou via LLM). No Google Colab, cliente e servidor podem ser testados na mesma sessão utilizando um transporte compatível, como o transporte em memória do SDK.</p>
+</blockquote>
+<hr />
+<h3 id="4-pratica-vision-agent-para-detectar-mudancas-entre-imagens">💻 4. Prática: Vision Agent para Detectar Mudanças entre Imagens</h3>
+<hr />
+<p>Nesta prática final, vamos integrar tudo o que construímos no minicurso para criar um <strong>Vision Agent completo</strong>, capaz de inspecionar imagens com <strong>YOLO + OpenCV</strong>, tomar decisões com base nas detecções, acionar ferramentas via <strong>MCP</strong> e enviar alertas automáticos no <strong>Telegram</strong>!</p>
+<h4 id="arquitetura-do-projeto">Arquitetura do Projeto</h4>
+<pre class="highlight"><code class="language-text">Imagem enviada ao Colab
+        ↓
+YOLO + OpenCV
+        ↓
+Detecções estruturadas
+        ↓
+Política de decisão do agente
+        ↓
+Cliente MCP ↔ Servidor MCP
+        ↓
+Ferramenta de verificação
+        ↓
+Regra de alerta
+        ↓
+Telegram Bot API</code></pre>
+<h4 id="ferramentas-do-agente">Ferramentas do Agente</h4>
+<p>Nosso servidor expõe quatro ferramentas fundamentais para o ciclo do agente:</p>
+<ul>
+<li><code>detectar_objetos(imagem)</code>: executa o YOLO e retorna classes, confiança e coordenadas.</li>
+<li><code>contar_objetos(deteccoes, classe)</code>: contabiliza quantas detecções pertencem a uma classe específica.</li>
+<li><code>verificar_condicao(observacao)</code>: compara estados ou aplica uma regra definida para o cenário (ex.: mudança na cena ou presença não autorizada).</li>
+<li><code>enviar_alerta(mensagem, chat_id)</code>: envia uma notificação em tempo real via Telegram Bot API.</li>
+</ul>
+<h4 id="como-o-agente-escolhe-o-que-investigar">Como o agente escolhe o que investigar?</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Versão Básica (Regras Determinísticas)</label><label for="__tabbed_2_2">Versão com LLM (Planejador Autônomo)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>A versão padrão do nosso projeto utiliza <strong>regras determinísticas em Python</strong>:</p>
+<ol>
+<li>O agente observa a imagem (ou compara duas imagens: <em>antes</em> e <em>depois</em>).</li>
+<li>Se forem detectadas pessoas (<code>person</code>) ou uma variação na contagem de objetos da cena, a política do agente decide acionar a ferramenta de verificação <code>verificar_condicao(observacao)</code>.</li>
+<li>Em seguida, a regra de alerta avalia o resultado da verificação e decide se deve chamar <code>enviar_alerta()</code> para notificar o usuário no Telegram.</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>Um <strong>Modelo de Linguagem (LLM)</strong> pode substituir ou complementar esse planejador determinístico:</p>
+<ul>
+<li>Em vez de <code>if/else</code> fixos, o LLM lê a lista de ferramentas do Servidor MCP e escolhe quais chamar com base no objetivo em linguagem natural e nos resultados das etapas anteriores.</li>
+<li>Como essa opção exige acesso a um provedor de modelo e uma chave de API (<code>API Key</code>), ela é opcional e não é necessária para executar a versão básica do minicurso.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr />
+<h4 id="passo-1-instalacao-das-dependencias">Passo 1: Instalação das Dependências</h4>
+<p>No Google Colab, instalamos o <code>ultralytics</code>, o SDK do <code>mcp</code> (ou <code>fastmcp</code>) e a biblioteca <code>requests</code> para comunicação com a API do Telegram.</p>
+<pre class="highlight"><code class="language-python"># No Google Colab, descomente a linha abaixo para instalar:
+# !pip install -q ultralytics opencv-python matplotlib requests mcp
+
+import cv2
+import requests
+from ultralytics import YOLO
+
+# Carrega o modelo YOLO pré-treinado
+modelo = YOLO('yolov8n.pt')</code></pre>
+<hr />
+<h4 id="passo-2-definindo-as-ferramentas-de-visao-e-verificacao">Passo 2: Definindo as Ferramentas de Visão e Verificação</h4>
+<p>Resgatamos as funções estruturadas do <strong>Dia 02</strong> e adicionamos a ferramenta de verificação de mudanças entre duas observações (ex.: imagem de referência vs. imagem atual) e o disparo de alerta para o Telegram.</p>
+<pre class="highlight"><code class="language-python">def detectar_objetos(caminho_ou_img, limite_confianca=0.5):
+    """Retorna lista de dicionários com classe, confiança e coordenadas."""
+    resultados = modelo.predict(source=caminho_ou_img, conf=limite_confianca, verbose=False)
+    deteccoes = []
+
+    for caixa in resultados[0].boxes:
+        id_cls = int(caixa.cls[0])
+        deteccoes.append({
+            'classe': resultados[0].names[id_cls],
+            'confianca': round(float(caixa.conf[0]), 3),
+            'coordenadas': [int(v) for v in caixa.xyxy[0]]
+        })
+    return deteccoes
+
+
+def contar_objetos(deteccoes, classe):
+    """Conta as detecções de uma classe específica."""
+    return sum(1 for obj in deteccoes if obj['classe'] == classe)
+
+
+def verificar_condicao(observacao):
+    """
+    Aplica a regra do cenário: compara a contagem anterior com a atual
+    e verifica se houve mudança relevante ou presença de pessoas.
+    """
+    antes = observacao.get('contagem_antes', 0)
+    depois = observacao.get('contagem_depois', 0)
+    classe = observacao.get('classe_monitorada', 'person')
+
+    mudou = depois != antes
+    diferenca = depois - antes
+
+    return {
+        'classe': classe,
+        'mudanca_detectada': mudou,
+        'diferenca': diferenca,
+        'alerta_necessario': mudou and depois &gt; 0,
+        'resumo': f"Classe '{classe}': antes={antes}, agora={depois} (variação: {diferenca:+d})."
+    }
+
+
+def enviar_alerta(mensagem, token_bot, chat_id):
+    """Envia uma mensagem para o Telegram usando a Bot API."""
+    if not token_bot or not chat_id:
+        print(f'[SIMULAÇÃO TELEGRAM] Mensagem que seria enviada:\n👉 {mensagem}')
+        return {'ok': True, 'simulado': True}
+
+    url = f'https://api.telegram.org/bot{token_bot}/sendMessage'
+    payload = {'chat_id': chat_id, 'text': mensagem}
+    resposta = requests.post(url, json=payload, timeout=10)
+    return resposta.json()</code></pre>
+<hr />
+<h4 id="passo-3-expondo-as-ferramentas-em-um-servidor-mcp">Passo 3: Expondo as Ferramentas em um Servidor MCP</h4>
+<p>Com o <code>FastMCP</code> (parte do SDK oficial do MCP em Python), podemos registrar nossas funções como ferramentas padronizadas que qualquer cliente MCP ou LLM consegue descobrir e invocar:</p>
+<pre class="highlight"><code class="language-python">from mcp.server.fastmcp import FastMCP
+
+# Cria o servidor MCP do nosso Agente de Visão
+mcp_server = FastMCP('VisionAgentServer')
+
+@mcp_server.tool()
+def tool_detectar_objetos(caminho_imagem: str, confianca: float = 0.5) -&gt; list:
+    """Detecta objetos em uma imagem usando YOLO e retorna classes, confiança e coordenadas."""
+    return detectar_objetos(caminho_imagem, limite_confianca=confianca)
+
+@mcp_server.tool()
+def tool_contar_objetos(deteccoes: list, classe: str) -&gt; int:
+    """Conta quantos objetos de uma determinada classe existem na lista de detecções."""
+    return contar_objetos(deteccoes, classe)
+
+@mcp_server.tool()
+def tool_verificar_condicao(observacao: dict) -&gt; dict:
+    """Verifica se houve mudança relevante na cena monitorada."""
+    return verificar_condicao(observacao)
+
+@mcp_server.tool()
+def tool_enviar_alerta(mensagem: str, token_bot: str = '', chat_id: str = '') -&gt; dict:
+    """Envia um alerta para o Telegram caso uma condição crítica seja confirmada."""
+    return enviar_alerta(mensagem, token_bot, chat_id)</code></pre>
+<hr />
+<h4 id="passo-4-executando-o-ciclo-completo-do-agente">Passo 4: Executando o Ciclo Completo do Agente</h4>
+<p>Agora unimos todas as etapas no ciclo <strong>Observação → Interpretação → Decisão → Ação → Resultado</strong>:</p>
+<pre class="highlight"><code class="language-python">def executar_vision_agent(
+    img_referencia,
+    img_atual,
+    classe_alvo='person',
+    telegram_token='',
+    telegram_chat_id=''
+):
+    print('1. [OBSERVAÇÃO] Analisando imagens com YOLO...')
+    det_antes = tool_detectar_objetos(img_referencia)
+    det_depois = tool_detectar_objetos(img_atual)
+
+    print('2. [INTERPRETAÇÃO] Contabilizando objetos da classe:', classe_alvo)
+    qtd_antes = tool_contar_objetos(det_antes, classe_alvo)
+    qtd_depois = tool_contar_objetos(det_depois, classe_alvo)
+
+    observacao = {
+        'classe_monitorada': classe_alvo,
+        'contagem_antes': qtd_antes,
+        'contagem_depois': qtd_depois
+    }
+
+    print('3. [DECISÃO] Acionando ferramenta de verificação de condição...')
+    verificacao = tool_verificar_condicao(observacao)
+    print('   Resultado da verificação:', verificacao['resumo'])
+
+    print('4. [AÇÃO] Avaliando regra de alerta...')
+    if verificacao['alerta_necessario']:
+        msg = (
+            f"🚨 ALERTA DO VISION AGENT!\n"
+            f"Mudança detectada na cena monitorada.\n"
+            f"{verificacao['resumo']}"
+        )
+        resultado_envio = tool_enviar_alerta(msg, telegram_token, telegram_chat_id)
+        print('5. [RESULTADO] Alerta processado com sucesso!', resultado_envio)
+    else:
+        print('5. [RESULTADO] Nenhuma anomalia crítica. Nenhum alerta enviado.')
+
+
+# Teste rápido comparando duas cenas
+url_cena_1 = 'https://ultralytics.com/images/zidane.jpg'
+url_cena_2 = 'https://ultralytics.com/images/bus.jpg'
+
+executar_vision_agent(
+    img_referencia=url_cena_1,
+    img_atual=url_cena_2,
+    classe_alvo='person'
+)</code></pre>
+<p style="text-align: center; margin-top: 24px;">
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://google.com" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+</p>
+
+<hr />
+<h3 id="para-ir-mais-a-fundo">💭 Para ir mais a fundo...</h3>
+<hr />
+<h4 id="materiais-e-artigos-sugeridos">📚 Materiais e artigos sugeridos</h4>
+<ul>
+<li><a href="https://arxiv.org/html/2506.12469v1" target="_blank">Levels of Autonomy for AI Agents — Working Paper (arXiv)</a></li>
+<li><a href="https://modelcontextprotocol.io/" target="_blank">Documentação Oficial do Model Context Protocol (MCP)</a></li>
+<li><a href="https://core.telegram.org/bots/api" target="_blank">Documentação Oficial da Telegram Bot API</a></li>
+</ul>
+<h4 id="prompts-para-estudar-com-llms">🤖 Prompts para estudar com LLMs</h4>
+<p>Copie e cole os prompts abaixo no seu assistente de IA favorito para aprofundar os conceitos vistos na aula:</p>
+<ol>
+<li>
+<p><strong>Arquitetura de Agentes de Visão (Regras vs. LLMs):</strong></p>
+<blockquote>
+<p><em>"Explique a diferença entre um pipeline tradicional de Visão Computacional (que apenas executa um modelo como YOLO) e um Agente de Visão (Vision Agent) que segue o ciclo Observação → Interpretação → Decisão → Ação. Compare quando vale a pena usar uma política de decisão baseada em regras determinísticas em Python e quando vale a pena usar um LLM como planejador."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Model Context Protocol (MCP) na Prática:</strong></p>
+<blockquote>
+<p><em>"Explique de forma didática o que é o Model Context Protocol (MCP), qual problema ele resolve no desenvolvimento de agentes de IA e qual é o papel do Host, do Cliente MCP e do Servidor MCP. Mostre um exemplo simples em Python usando FastMCP expondo duas ferramentas."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Integrando Visão Computacional com Bot do Telegram:</strong></p>
+<blockquote>
+<p><em>"Como criar um bot no Telegram usando o @BotFather, obter o Token e o Chat ID, e enviar tanto mensagens de texto quanto imagens anotadas pelo OpenCV/YOLO em Python usando a biblioteca requests? Mostre o código passo a passo e explique boas práticas para evitar enviar múltiplos alertas repetidos em vídeos."</em></p>
+</blockquote>
+</li>
+</ol></p>
+    </article>
+
+    
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../dia02/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../contatos/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+    <small class="d-block mb-3">Desenvolvido por Marcos Aurélio Tavares Filho.</small>
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+
+</body>
+
+</html>
