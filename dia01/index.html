@@ -1,0 +1,561 @@
+<!doctype html>
+<html data-bs-theme="">
+
+<head>
+    <title>Fundamentos de imagens digitais - BootCamp - Visão Computacional + IA na prática
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://marcostavar3s.github.io/semanaC-T/dia01/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+
+    
+    
+    
+    <link href="../assets/stylesheets/extra.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">BootCamp - Visão Computacional + IA na prática</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Início]</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class=" active 
+                            nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Material]</a>
+                            <ul class="dropdown-menu">
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Fundamentos de imagens digitais</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia02/" class="dropdown-item text-decoration-none ">Modelos de Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia03/" class="dropdown-item text-decoration-none ">Agentes + Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../contatos/">[Contatos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main>
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Fundamentos de imagens digitais</h1>
+            
+        </header>
+        
+        
+        
+        <p><h1 id="fundamentos-de-imagens-digitais">Fundamentos de Imagens Digitais</h1>
+<hr />
+<h3 id="ferramentas-utilizadas">🛠️ Ferramentas Utilizadas</h3>
+<hr />
+<div style="inline-flex">
+<a href="https://colab.new" target="_blank"><img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Google Colab"></a>
+<img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white" alt="NumPy">
+</div>
+
+<hr />
+<h3 id="1-o-que-e-uma-imagem-digital">📖 1. O que é uma Imagem Digital?</h3>
+<hr />
+<p>
+Toda imagem digital é composta por <strong>pixels</strong> (<em>picture elements</em>), a menor unidade de representação visual computacional. Na prática, <strong>uma imagem é representada na memória como uma matriz (ou tensor) de valores numéricos</strong>, em que cada posição guarda a intensidade luminosa ou de cor daquele ponto.
+</p>
+
+<p><img src="../assets/images/pixels.jpeg" alt="Imagem didática dividida em duas partes com fundo de um recife de corais desfocado. À esquerda, há um painel rotulado Imagem Original de Alta Resolução que exibe uma cena subaquática nítida com corais coloridos, um peixe e bolhas de ar, destacando uma área delimitada por um quadrado branco. Uma seta aponta desse quadrado para a direita, indicando a extração do elemento. À direita, vê-se uma amostra ampliada de um pixel de cor azul sólido, acompanhada pelo texto descritivo Amostra do Pixel Extraído e uma pequena representação de uma grade de pixels (Local de Origem - Mapa de Bits 1x1) apontando exatamente de onde ele veio."></p>
+<p>Para manipular imagens via código, precisamos compreender quatro conceitos fundamentais: <strong>resolução</strong>, <strong>canais e escalas de cores</strong>, <strong>filtros</strong> e <strong>máscaras</strong>.</p>
+<h4 id="resolucao">📐 Resolução</h4>
+<p>Consiste nas dimensões espaciais da imagem (<strong>altura × largura</strong>), representando a quantidade total de pixels organizados na matriz.</p>
+<pre class="highlight"><code class="language-text">Maior resolução → Maior quantidade de pixels → Maior nível de detalhes visuais.</code></pre>
+<ul>
+<li><strong>Exemplo prático:</strong> Uma imagem <strong>Full HD</strong> (1920x1080 pixels = 2.07 Mpixels) versus uma <strong>Ultra HD 4K</strong> (3840 x 2160 pixels = 8.29 Mpixels). Qual delas preserva mais detalhes ao darmos zoom?.</li>
+</ul>
+<hr />
+<h3 id="2-canais-e-escalas-de-cores">🎨 2. Canais e Escalas de Cores</h3>
+<hr />
+<p>Os <strong>canais</strong> representam a quantidade de camadas que compõem a matriz da imagem. Eles armazenam propriedades como cor, luminosidade e transparência em cada pixel. Em imagens padrão de 8 bits por canal (<code>uint8</code>), cada valor varia de <strong>0</strong> (ausência de intensidade) a <strong>255</strong> (intensidade máxima).</p>
+<p>A forma como esses canais são combinados define a <strong>escala (ou espaço) de cores</strong>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:8"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">RGB / BGR</label><label for="__tabbed_1_2">HSV / HSB</label><label for="__tabbed_1_3">Grayscale</label><label for="__tabbed_1_4">CMYK</label><label for="__tabbed_1_5">HSL</label><label for="__tabbed_1_6">CIE Lab</label><label for="__tabbed_1_7">RGBA / HSLA</label><label for="__tabbed_1_8">YUV / YCbCr</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>R</strong> (<em>Red</em>), <strong>G</strong> (<em>Green</em>), <strong>B</strong> (<em>Blue</em>)</li>
+<li><strong>Descrição / Aplicação:</strong> Padrão em telas, monitores e fotografia digital.</li>
+<li><strong>Atenção no OpenCV:</strong> Por razões históricas, o OpenCV lê imagens no formato <strong>BGR</strong> (Azul, Verde, Vermelho). Para exibir as cores corretas no <code>matplotlib</code>, convertemos de BGR para RGB.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>H</strong> (<em>Hue</em> / Matiz), <strong>S</strong> (<em>Saturation</em> / Saturação), <strong>V/B</strong> (<em>Value</em> / <em>Brightness</em> / Brilho)</li>
+<li><strong>Descrição / Aplicação:</strong> Separa a cor pura (Matiz) da vivacidade (Saturação) e da iluminação (Valor). Essencial em editores de imagem para alterar a <strong>saturação</strong> sem distorcer as cores originais.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>L</strong> (<em>Luminance</em> / Intensidade)</li>
+<li><strong>Descrição / Aplicação:</strong> Canal único (matriz 2D). Muito utilizado em fotografia P&amp;B, detecção de bordas e pré-processamento leve.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>C</strong> (<em>Cyan</em>), <strong>M</strong> (<em>Magenta</em>), <strong>Y</strong> (<em>Yellow</em>), <strong>K</strong> (<em>Black</em>)</li>
+<li><strong>Descrição / Aplicação:</strong> Modelo subtrativo voltado para impressão gráfica e editorial.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>H</strong> (<em>Hue</em>), <strong>S</strong> (<em>Saturation</em>), <strong>L</strong> (<em>Lightness</em>)</li>
+<li><strong>Descrição / Aplicação:</strong> Desenvolvimento web (CSS) e design de interfaces (UI/UX).</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>L</strong> (<em>Lightness</em>), <strong>a</strong> (eixo Verde-Vermelho), <strong>b</strong> (eixo Azul-Amarelo)</li>
+<li><strong>Descrição / Aplicação:</strong> Gerenciamento profissional de cor e aproximação da percepção visual humana.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> Canais base + <strong>A</strong> (<em>Alpha</em>)</li>
+<li><strong>Descrição / Aplicação:</strong> Extensão que adiciona um quarto canal para controle de opacidade/transparência.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Canais:</strong> <strong>Y</strong> (<em>Luma</em>), <strong>U/Cb</strong> (<em>Chroma Azul</em>), <strong>V/Cr</strong> (<em>Chroma Vermelho</em>)</li>
+<li><strong>Descrição / Aplicação:</strong> Separa a luminosidade da crominância. Usado em transmissão de vídeo e compressão JPEG.</li>
+</ul>
+</div>
+</div>
+</div>
+<p><img alt="Escalas de cor" src="../assets/images/escalas_de_cor.png" /></p>
+<p style="text-align:center"><strong>Observação:</strong> Maior quantidade de canais → Maior volume de informação por pixel → Maior consumo de memória e processamento.</p>
+
+<hr />
+<h3 id="3-filtros-ajustes-e-mascaras">🎛️ 3. Filtros, Ajustes e Máscaras</h3>
+<hr />
+<p>Em processamento de imagens, <strong>filtros</strong> são operações matemáticas aplicadas sobre os pixels para modificar a aparência da imagem — seja ajustando cores e iluminação, suavizando ruídos ou destacando contornos.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:5"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Ajuste Tonal &amp; Cor</label><label for="__tabbed_2_2">Filtros Espaciais (Borramento e Suavização)</label><label for="__tabbed_2_3">Detecção de Bordas</label><label for="__tabbed_2_4">Filtros Morfológicos</label><label for="__tabbed_2_5">Estilização &amp; Efeitos</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Operações ponto a ponto que alteram o brilho, o contraste e a vivacidade das cores:</p>
+<ul>
+<li><strong>Brilho e Contraste:</strong> Transformação linear dada por $g(x,y) = \alpha \cdot f(x,y) + \beta$, onde $\alpha$ (<em>alpha</em>) controla o <strong>contraste</strong> (amplitude entre claros e escuros) e $\beta$ (<em>beta</em>) soma ou subtrai <strong>brilho</strong>.</li>
+<li><strong>Matiz / Saturação (HSV Shift):</strong> Altera a roda de cores (Matiz) ou a intensidade/pureza das cores (<strong>Saturação</strong>).</li>
+<li><strong>Equalização de Histograma:</strong> Redistribui as intensidades dos pixels para maximizar o contraste global.</li>
+<li><strong>Ajuste de Gamma (Correção Gamma):</strong> Mapeia a luminância de forma não linear para corrigir exposição.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<p>Modificam o valor de cada pixel calculando uma combinação dos seus pixels vizinhos (convolução):</p>
+<ul>
+<li><strong>Borramento por Média (Box Blur):</strong> Substitui o valor do pixel pela média simples dos vizinhos, provocando um borramento uniforme.</li>
+<li><strong>Suavização Gaussiana (Gaussian Blur):</strong> Aplica uma matriz de pesos baseada na distribuição gaussiana para suavizar a imagem de forma natural e reduzir ruídos de alta frequência.</li>
+<li><strong>Filtro de Mediana (Median Blur):</strong> Substitui o pixel pela mediana da vizinhança. Excelente para remover ruídos do tipo <em>"sal e pimenta"</em> preservando contornos.</li>
+<li><strong>Filtro Bilateral:</strong> Suaviza regiões internas mantendo as bordas nítidas.</li>
+<li><strong>Nitidez (Sharpening / Unsharp Mask):</strong> Realça bordas e detalhes finos aumentando o contraste entre pixels adjacentes.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Sobel:</strong> Calcula o gradiente de intensidade nas direções horizontal ($X$) e vertical ($Y$) para destacar transições de brilho.</li>
+<li><strong>Canny:</strong> Algoritmo multi-estágio de alta precisão para extração de contornos finos (usa suavização gaussiana, gradiente, supressão de não-máximos e histerese).</li>
+<li><strong>Prewitt:</strong> Semelhante ao Sobel, opera com máscaras de convolução direcionais para estimar bordas.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Erosão:</strong> Encolhe regiões claras da imagem, removendo pequenos ruídos brancos e desconectando objetos finos.</li>
+<li><strong>Dilatação:</strong> Expande regiões claras, preenchendo pequenos buracos e conectando estruturas próximas.</li>
+<li><strong>Abertura / Fechamento:</strong> Combinações de erosão e dilatação usadas para limpar o fundo (abertura) ou fechar falhas internas (fechamento).</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Emboss (Relevo):</strong> Cria um efeito tridimensional simulando luz e sombra ao longo das bordas.</li>
+<li><strong>Posterizar / Vetorização:</strong> Reduz a paleta de cores da imagem, agrupando gradientes em faixas sólidas.</li>
+<li><strong>Vinheta:</strong> Escurece gradualmente as bordas externas para direcionar o foco ao centro da cena.</li>
+</ul>
+</div>
+</div>
+</div>
+<h4 id="mascaras">🎭 Máscaras</h4>
+<p>O termo <strong>máscara</strong> aparece em dois contextos complementares no processamento de imagens:</p>
+<ol>
+<li><strong>Máscara de Região (ROI / Recorte Binário):</strong> Uma imagem em preto e branco (0 e 255) de mesma resolução usada para selecionar quais pixels serão mantidos ou editados (região branca) e quais serão ocultados ou ignorados (região preta).</li>
+<li><strong>Máscara de Convolução (Kernel):</strong> Uma pequena matriz (ex.: $3\times3$ ou $5\times5$) que desliza sobre a imagem para calcular borramento, nitidez ou bordas.</li>
+</ol>
+<p><img src="../assets/images/mascara.jpeg" alt="Ilustração do uso de máscara em uma imagem para isolar uma região de interesse" style="display:flex; justify-text:center"></p>
+<hr />
+<h3 id="4-pratica-construindo-um-editor-de-imagens">💻 4. Prática: Construindo um Editor de Imagens</h3>
+<hr />
+<p>Nesta prática, vamos construir passo a passo um <strong>Editor de Imagens em Python</strong> capaz de realizar:</p>
+<ul>
+<li>Conversão de escalas de cores (<code>RGB</code>, <code>Escala de Cinza</code>, <code>HSV</code>);</li>
+<li>Mudança de <strong>brilho</strong>, <strong>contraste</strong> e <strong>saturação</strong>;</li>
+<li><strong>Borramento</strong>, <strong>suavização</strong> e <strong>aplicação de filtros</strong> (Média, Gaussiano, Mediana, Bilateral, Nitidez e Bordas).</li>
+</ul>
+<blockquote>
+<p><strong>Dica:</strong> Este material utiliza a biblioteca <strong>OpenCV</strong> como referência. Caso queira consultar os comandos equivalentes na biblioteca <strong>Pillow (PIL)</strong>, acesse o guia comparativo do <a href="https://codoraven.com/category/tutorials/opencv-vs-pillow/" target="_blank">CodoRaven</a>.</p>
+</blockquote>
+<hr />
+<h4 id="passo-1-carregar-a-imagem-e-inspecionar-sua-estrutura">Passo 1: Carregar a imagem e inspecionar sua estrutura</h4>
+<p>Primeiro, importamos as bibliotecas, abrimos a imagem com o OpenCV e verificamos suas dimensões (<code>shape</code>) e quantidade de canais.</p>
+<pre class="highlight"><code class="language-python">import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 1. Abertura da imagem (substitua pelo caminho da sua imagem no Colab)
+img_bgr = cv2.imread('caminho_da_imagem.jpg')
+
+# Conversão base de BGR (padrão OpenCV) para RGB (padrão de exibição)
+img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+
+print('Inspeção da Imagem ' + '=' * 25)
+print(f'Resolução (Altura x Largura): {img_rgb.shape[0]} x {img_rgb.shape[1]} pixels')
+print(f'Quantidade de canais:         {img_rgb.shape[2]}')
+print(f'Tipo de dado (dtype):         {img_rgb.dtype}')
+print('=' * 44)</code></pre>
+<hr />
+<h4 id="passo-2-conversao-entre-escalas-de-cores">Passo 2: Conversão entre escalas de cores</h4>
+<p>Vamos converter a imagem para diferentes espaços de cores (<code>RGB</code>, <code>Cinza</code> e <code>HSV</code>) e comparar os resultados.</p>
+<pre class="highlight"><code class="language-python"># Conversões de escala de cor
+img_cinza = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
+img_hsv = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2HSV)
+
+# Visualização lado a lado
+fig, ax = plt.subplots(2, 2, figsize=(14, 10))
+
+ax[0][0].set_title('Original no OpenCV (BGR)')
+ax[0][0].imshow(img_bgr)
+ax[0][0].axis('off')
+
+ax[0][1].set_title('Escala de Cinza (1 Canal)')
+ax[0][1].imshow(img_cinza, cmap='gray')
+ax[0][1].axis('off')
+
+ax[1][0].set_title('RGB (Cores Reais)')
+ax[1][0].imshow(img_rgb)
+ax[1][0].axis('off')
+
+ax[1][1].set_title('Espaço HSV (Matiz, Saturação, Brilho)')
+ax[1][1].imshow(img_hsv)
+ax[1][1].axis('off')
+
+fig.suptitle('Comparação de Escalas de Cores', fontsize=16)
+plt.tight_layout()
+plt.show()</code></pre>
+<hr />
+<h4 id="passo-3-ajustes-de-brilho-contraste-e-saturacao">Passo 3: Ajustes de Brilho, Contraste e Saturação</h4>
+<ul>
+<li><strong>Brilho e Contraste:</strong> Usamos <code>cv2.convertScaleAbs(img, alpha, beta)</code>, onde <code>alpha</code> multiplica os pixels (contraste: <code>1.0</code> mantém original, <code>&gt; 1.0</code> aumenta) e <code>beta</code> soma um valor constante (brilho: <code>0</code> mantém original, valores positivos clareiam e negativos escurecem).</li>
+<li><strong>Saturação:</strong> Convertemos a imagem para <code>HSV</code>, multiplicamos o canal <strong>S</strong> (índice <code>1</code>) pelo fator desejado e convertemos de volta para <code>RGB</code>.</li>
+</ul>
+<pre class="highlight"><code class="language-python">def ajustar_brilho_contraste(img_rgb, contraste=1.0, brilho=0):
+    """
+    contraste (alpha): 0.5 (baixo) a 3.0 (alto) | padrão = 1.0
+    brilho (beta):    -100 (escuro) a 100 (claro) | padrão = 0
+    """
+    return cv2.convertScaleAbs(img_rgb, alpha=contraste, beta=brilho)
+
+
+def ajustar_saturacao(img_rgb, fator_saturacao=1.0):
+    """
+    fator_saturacao: 0.0 (tons de cinza) a 3.0 (super saturado) | padrão = 1.0
+    """
+    hsv = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2HSV).astype(np.float32)
+    hsv[:, :, 1] = np.clip(hsv[:, :, 1] * fator_saturacao, 0, 255)
+    hsv = hsv.astype(np.uint8)
+    return cv2.cvtColor(hsv, cv2.COLOR_HSV2RGB)
+
+
+# Testando os ajustes
+img_brilho_contraste = ajustar_brilho_contraste(img_rgb, contraste=1.4, brilho=30)
+img_saturada = ajustar_saturacao(img_rgb, fator_saturacao=1.8)</code></pre>
+<hr />
+<h4 id="passo-4-borramento-suavizacao-e-aplicacao-de-filtros">Passo 4: Borramento, Suavização e Aplicação de Filtros</h4>
+<p>Agora criamos as operações espaciais de borramento, suavização e realce/detecção de bordas:</p>
+<pre class="highlight"><code class="language-python">def aplicar_filtro(img_rgb, tipo='nenhum', intensidade=5):
+    # Garante que o tamanho da máscara (kernel) seja ímpar e &gt;= 3
+    k = max(3, int(intensidade))
+    if k % 2 == 0:
+        k += 1
+
+    if tipo == 'borramento_media':
+        return cv2.blur(img_rgb, (k, k))
+
+    elif tipo == 'suavizacao_gaussiana':
+        return cv2.GaussianBlur(img_rgb, (k, k), 0)
+
+    elif tipo == 'suavizacao_mediana':
+        return cv2.medianBlur(img_rgb, k)
+
+    elif tipo == 'suavizacao_bilateral':
+        # Suaviza preservando as bordas
+        return cv2.bilateralFilter(img_rgb, d=k, sigmaColor=75, sigmaSpace=75)
+
+    elif tipo == 'nitidez':
+        kernel_nitidez = np.array([
+            [ 0, -1,  0],
+            [-1,  5, -1],
+            [ 0, -1,  0]
+        ])
+        return cv2.filter2D(img_rgb, -1, kernel_nitidez)
+
+    elif tipo == 'bordas_canny':
+        cinza = cv2.cvtColor(img_rgb, cv2.COLOR_RGB2GRAY)
+        return cv2.Canny(cinza, threshold1=80, threshold2=180)
+
+    elif tipo == 'relevo_emboss':
+        kernel_emboss = np.array([
+            [-2, -1, 0],
+            [-1,  1, 1],
+            [ 0,  1, 2]
+        ])
+        return cv2.filter2D(img_rgb, -1, kernel_emboss)
+
+    return img_rgb</code></pre>
+<hr />
+<h4 id="passo-5-juntando-tudo-o-editor-de-imagens-completo">Passo 5: Juntando Tudo — O Editor de Imagens Completo</h4>
+<p>Por fim, integramos todas as funcionalidades em uma única função <code>editor_de_imagens</code>. No Google Colab, você pode usar <code>ipywidgets</code> (<code>@interact</code>) para controlar os parâmetros com barras deslizantes (<em>sliders</em>) em tempo real!</p>
+<pre class="highlight"><code class="language-python">from ipywidgets import interact, FloatSlider, IntSlider, Dropdown
+
+def editor_de_imagens(
+    escala='RGB',
+    brilho=0,
+    contraste=1.0,
+    saturacao=1.0,
+    filtro='nenhum',
+    intensidade_filtro=5
+):
+    # 1. Ajuste de brilho, contraste e saturação na base RGB
+    editada = ajustar_brilho_contraste(img_rgb, contraste=contraste, brilho=brilho)
+    editada = ajustar_saturacao(editada, fator_saturacao=saturacao)
+
+    # 2. Aplicação de borramento, suavização ou filtro
+    editada = aplicar_filtro(editada, tipo=filtro, intensidade=intensidade_filtro)
+
+    # 3. Conversão final de escala de cor (se a saída ainda tiver 3 canais)
+    cmap_exibicao = None
+    if editada.ndim == 2:
+        cmap_exibicao = 'gray'
+    elif escala == 'Cinza':
+        editada = cv2.cvtColor(editada, cv2.COLOR_RGB2GRAY)
+        cmap_exibicao = 'gray'
+    elif escala == 'HSV':
+        editada = cv2.cvtColor(editada, cv2.COLOR_RGB2HSV)
+
+    # 4. Exibição comparativa: Original vs. Editada
+    fig, ax = plt.subplots(1, 2, figsize=(14, 6))
+
+    ax[0].set_title('Imagem Original')
+    ax[0].imshow(img_rgb)
+    ax[0].axis('off')
+
+    ax[1].set_title(f'Editada ({escala} | Filtro: {filtro})')
+    ax[1].imshow(editada, cmap=cmap_exibicao)
+    ax[1].axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+
+# Painel interativo no Google Colab
+interact(
+    editor_de_imagens,
+    escala=Dropdown(options=['RGB', 'Cinza', 'HSV'], value='RGB', description='Escala:'),
+    brilho=IntSlider(min=-100, max=100, step=5, value=0, description='Brilho:'),
+    contraste=FloatSlider(min=0.5, max=3.0, step=0.1, value=1.0, description='Contraste:'),
+    saturacao=FloatSlider(min=0.0, max=3.0, step=0.1, value=1.0, description='Saturação:'),
+    filtro=Dropdown(
+        options=[
+            'nenhum',
+            'borramento_media',
+            'suavizacao_gaussiana',
+            'suavizacao_mediana',
+            'suavizacao_bilateral',
+            'nitidez',
+            'bordas_canny',
+            'relevo_emboss'
+        ],
+        value='nenhum',
+        description='Filtro:'
+    ),
+    intensidade_filtro=IntSlider(min=3, max=31, step=2, value=5, description='Intensidade:')
+);</code></pre>
+<hr />
+<h3 id="para-ir-mais-a-fundo">💭 Para ir mais a fundo...</h3>
+<hr />
+<h4 id="materiais-e-artigos-sugeridos">📚 Materiais e artigos sugeridos</h4>
+<ul>
+<li><a href="https://docs.opencv.org/4.x/d2/d96/tutorial_py_table_of_contents_imgproc.html" target="_blank">Documentação Oficial do OpenCV — Image Processing in OpenCV (Python)</a></li>
+<li><a href="https://codoraven.com/category/tutorials/opencv-vs-pillow/" target="_blank">CodoRaven — Comparativo prático entre OpenCV e Pillow</a></li>
+</ul>
+<h4 id="prompts-para-estudar-com-llms">🤖 Prompts para estudar com LLMs</h4>
+<p>Copie e cole os prompts abaixo no seu assistente de IA favorito para aprofundar a base teórica:</p>
+<ol>
+<li>
+<p><strong>Representação Matricial, Amostragem e Quantização:</strong></p>
+<blockquote>
+<p><em>"Explique como uma imagem digital monocromática e uma colorida são representadas matematicamente na memória (como matrizes/tensores). Aborde os conceitos de amostragem espacial (resolução espacial) e quantização de intensidade (resolução em tons de cinza ou profundidade de bits), detalhando o impacto de cada um na perda ou preservação de detalhes visuais."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Espaços de Cores na Visão Computacional:</strong></p>
+<blockquote>
+<p><em>"Explique o funcionamento dos canais de cor em imagens digitais. Compare o espaço de cores RGB com o HSV (ou HSL) e o CIELAB, explicando em quais cenários de visão computacional ou tratamento de imagem é mais vantajoso converter uma imagem de RGB para HSV ou para tons de cinza (grayscale)."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Máscaras e Operações Morfológicas:</strong></p>
+<blockquote>
+<p><em>"Explique o conceito de máscaras binárias e operações morfológicas básicas em processamento de imagens (Erosão, Dilatação, Abertura e Fechamento). Explique intuitivamente e matematicamente como cada uma dessas quatro operações altera os pixels de uma imagem binarizada e dê exemplos clássicos de uso."</em></p>
+</blockquote>
+</li>
+</ol></p>
+    </article>
+
+    
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href=".." class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../dia02/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+    <small class="d-block mb-3">Desenvolvido por Marcos Aurélio Tavares Filho.</small>
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+
+</body>
+
+</html>
