@@ -18,6 +18,9 @@ plugins:
 
 extra_css:
   - assets/stylesheets/extra.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   
 markdown_extensions:
   - attr_list
@@ -26,5 +29,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
 
 copyright: 'Desenvolvido por Marcos Aurélio Tavares Filho.'

@@ -43,6 +43,10 @@ Lembra dos filtros do Dia 01 que deslizavam pela imagem procurando bordas? A CNN
 
 #### 🎬 Simulador Animado: Veja uma CNN funcionando por dentro!
 
+Em cada posição da imagem, o **Filtro (Kernel)** $K$ de dimensão $3 \times 3$ multiplica os pixels vizinhos $I$ pelos seus pesos, soma os resultados e aplica a função de ativação $\text{ReLU}$ (que zera valores negativos):
+
+$$z = \sum_{i,j} I(x+i, y+j) \cdot K(i,j) \implies \text{ReLU}(z) = \max(0, z)$$
+
 Observe na animação interativa abaixo como o **Filtro (Kernel)** desliza sobre os pixels da imagem calculando o **Mapa de Características (*Feature Map*)** e ativando as camadas da rede até identificar o objeto. Você pode **pausar**, avançar **passo a passo**, **clicar em qualquer célula** do mapa ou **trocar o filtro**!
 
 <div class="cnn-sim-wrapper" id="cnn-simulator">
@@ -374,11 +378,11 @@ Quando entregamos uma imagem para o YOLO, ele executa **4 passos simples e organ
 <img src="../assets/images/yolo_passo_a_passo.gif" alt="Animação passo a passo mostrando como o YOLO funciona por dentro: 1. Padronização (Letterbox), 2. Divisão em Grade (Grid), 3. Palpites Simultâneos e 4. Faxina Final (NMS)">
 
 ##### Passo 1: Padronização da Imagem (*Letterbox*)
-A rede neural do YOLO espera receber imagens sempre de mesmo tamanho (por exemplo, um quadrado de 640x640 pixels). Mas se você enviar uma foto retangular de celular e simplesmente "espremê-la" para virar um quadrado, uma pessoa parecerá achatada ou esticada, confundindo o modelo.
+A rede neural do YOLO espera receber imagens sempre de mesmo tamanho (por exemplo, um quadrado de $640 \times 640\text{ pixels}$). Mas se você enviar uma foto retangular de celular e simplesmente "espremê-la" para virar um quadrado, uma pessoa parecerá achatada ou esticada, confundindo o modelo.
 Por isso, o YOLO usa uma técnica chamada **Letterbox**: ele diminui a foto mantendo o formato original dos objetos e preenche o espaço que sobrar nas bordas com faixas cinzas (igual às faixas pretas de um filme na TV).
 
 ##### Passo 2: Divisão em Grade (*Grid*)
-Imagine que o YOLO desenha uma **grade invisível** sobre a imagem, dividindo a foto em vários quadradinhos (como um tabuleiro de xadrez).
+Imagine que o YOLO desenha uma **grade invisível** ($S \times S$) sobre a imagem, dividindo a foto em vários quadradinhos (como um tabuleiro de xadrez).
 
 ```text
 +-------+-------+-------+
@@ -395,17 +399,17 @@ Imagine que o YOLO desenha uma **grade invisível** sobre a imagem, dividindo a 
 ##### Passo 3: Palpites Simultâneos em Cada Quadradinho
 Todos os quadradinhos da grade trabalham juntos e ao mesmo tempo. Cada quadradinho onde cai o centro de um objeto entrega um "pacote de informações" contendo:
 
-1. **Onde está a caixa (*Bounding Box*):** As coordenadas (x, y) de onde a caixa começa e onde termina.
+1. **Onde está a caixa (*Bounding Box*):** As coordenadas $(x_1, y_1)$ e $(x_2, y_2)$ de onde a caixa começa e onde termina (ou centro $(x, y)$ com largura $w$ e altura $h$).
 2. **O que é o objeto (*Classe*):** Se é uma `pessoa`, um `carro`, um `cachorro`, uma `mochila`, etc.
-3. **Qual a certeza (*Confiança*):** Uma nota de `0%` a `100%` (ou `0.0` a `1.0`) indicando o quão seguro o modelo está daquele palpite.
+3. **Qual a certeza (*Confiança*):** Uma nota $c \in [0, 1]$ (de $0\%$ a $100\%$) indicando o quão seguro o modelo está daquele palpite.
 
 ##### Passo 4: A Faxina Final (Filtro de Confiança + NMS)
 Como a grade tem milhares de quadradinhos dando palpites ao mesmo tempo, dois problemas acontecem: muitos quadradinhos dão palpites fracos onde não há nada, e quadradinhos vizinhos acabam desenhando **várias caixas repetidas sobre a mesma pessoa**.
 
 Para entregar um resultado limpo, o YOLO faz uma faxina automática em duas etapas:
 
-1. **Filtro de Confiança (*Confidence*):** Definimos uma nota de corte (por exemplo, `40%` ou `0.40`). Qualquer palpite com certeza menor que 40% é descartado na hora.
-2. **Eliminação de Caixas Repetidas (*NMS — Non-Maximum Suppression*):** Quando duas ou mais caixas estão sobrepostas em cima do mesmo objeto, o YOLO compara a nota de certeza delas, **mantém apenas a melhor caixa** e apaga todas as outras repetidas!
+1. **Filtro de Confiança (*Confidence*):** Definimos uma nota de corte (por exemplo, $40\%$ ou $0{,}40$). Qualquer palpite com certeza menor que $40\%$ é descartado na hora.
+2. **Eliminação de Caixas Repetidas (*NMS — Non-Maximum Suppression*):** Quando duas ou mais caixas estão sobrepostas em cima do mesmo objeto (medido pela métrica $\text{IoU} = \frac{\text{Área de Interseção}}{\text{Área de União}}$), o YOLO compara a nota de certeza delas, **mantém apenas a melhor caixa** e apaga todas as outras repetidas!
 
 ```text
 Antes da limpeza (NMS):            Depois da limpeza (NMS):
@@ -444,176 +448,17 @@ Além disso, o YOLO é disponibilizado em **5 tamanhos diferentes** (indicados p
 
 ---
 
-Chegou a hora de colocar a mão na massa! Vamos usar a biblioteca **Ultralytics YOLO** junto com o **OpenCV** para:
+Chegou a hora de colocar a mão na massa! No nosso notebook prático no **Google Colab**, vamos utilizar a biblioteca **Ultralytics YOLO** junto com o **OpenCV** para desenvolver as seguintes etapas:
 
-- Carregar um modelo YOLO pronto para uso;
-- Detectar objetos em uma foto e extrair **nome, confiança e posição** (base para o nosso Agente Inteligente do **Dia 03**!);
-- Testar **Detecção**, **Segmentação** e **Pose** trocando apenas uma linha de código;
-- Processar um **vídeo** quadro a quadro.
+1. **Configuração e Carregamento do Modelo:** instalação do pacote `ultralytics` e inspeção das $80$ classes pré-treinadas do modelo `yolov8n.pt`.
+2. **Detecção de Objetos em Imagens:** inferência com filtro de confiança (`conf=0.40`), plotagem das caixas delimitadoras (*Bounding Boxes*) e leitura das coordenadas $(x_1, y_1, x_2, y_2)$.
+3. **Extração Estruturada (Ponte para o Dia 03):** criação das funções `detectar_objetos()` e `contar_objetos()` que organizam as saídas do modelo em listas de dicionários prontas para tomada de decisão.
+4. **Segmentação de Instâncias e Estimativa de Pose:** execução comparativa dos modelos `yolov8n-seg.pt` (máscaras de contorno exato) e `yolov8n-pose.pt` (articulações do esqueleto humano).
+5. **Processamento de Vídeos (*Frame a Frame*):** leitura de vídeos com `cv2.VideoCapture`, detecção quadro a quadro e exportação do vídeo anotado com `cv2.VideoWriter`.
 
----
-
-#### Passo 1: Instalação e Carregamento do Modelo
-
-No Google Colab, instalamos a biblioteca `ultralytics` e carregamos o modelo `yolov8n.pt` (a versão *Nano*, super leve e rápida).
-
-```python
-# No Google Colab, descomente a linha abaixo para instalar:
-# !pip install -q ultralytics opencv-python matplotlib
-
-import cv2
-import matplotlib.pyplot as plt
-from ultralytics import YOLO
-
-# Carrega o modelo YOLO pré-treinado (baixa o arquivo automaticamente na 1ª vez)
-modelo = YOLO('yolov8n.pt')
-
-print(f'Quantidade de objetos que o modelo conhece: {len(modelo.names)}')
-print('Exemplos das 10 primeiras classes:', list(modelo.names.values())[:10])
-```
-
----
-
-#### Passo 2: Detectando Objetos e Lendo os Resultados
-
-Vamos passar uma imagem para o modelo, exibir o resultado com as caixas desenhadas e também listar no terminal cada objeto encontrado.
-
-```python
-# Podemos passar o caminho de uma foto no computador ou um link da internet (URL)
-url_imagem = 'https://ultralytics.com/images/bus.jpg'
-
-# Faz a detecção! O parâmetro conf=0.40 descarta palpites com menos de 40% de certeza
-resultados = modelo.predict(source=url_imagem, conf=0.40)
-resultado = resultados[0]
-
-# resultado.plot() devolve a imagem com as caixas desenhadas (em BGR, convertemos para RGB)
-img_anotada = cv2.cvtColor(resultado.plot(), cv2.COLOR_BGR2RGB)
-
-plt.figure(figsize=(8, 10))
-plt.title('Detecção de Objetos com YOLO')
-plt.imshow(img_anotada)
-plt.axis('off')
-plt.show()
-
-# Listando os detalhes de cada caixa encontrada
-print('Objetos Detectados ' + '=' * 35)
-for caixa in resultado.boxes:
-    id_classe = int(caixa.cls[0])
-    nome_classe = resultado.names[id_classe]
-    confianca = float(caixa.conf[0])
-    x1, y1, x2, y2 = map(int, caixa.xyxy[0])
-
-    print(f'• Objeto: {nome_classe:<10} | Certeza: {confianca:.1%} | Posição: ({x1}, {y1}) até ({x2}, {y2})')
-```
-
----
-
-#### Passo 3: Criando uma Função Organizada (Ponte para o Dia 03)
-
-No **Dia 03**, construiremos um **Agente de Visão** que tomará decisões automáticas (como enviar um alerta no Telegram quando pessoas entrarem em um local). Para que nosso código Python consiga tomar decisões facilmente, vamos guardar as detecções do YOLO em uma lista simples de dicionários:
-
-```python
-def detectar_objetos(caminho_ou_img, limite_confianca=0.5):
-    """
-    Roda o YOLO na imagem e devolve uma lista organizada
-    com o nome do objeto, a certeza (confiança) e as coordenadas da caixa.
-    """
-    resultados = modelo.predict(source=caminho_ou_img, conf=limite_confianca, verbose=False)
-    deteccoes = []
-
-    for caixa in resultados[0].boxes:
-        id_cls = int(caixa.cls[0])
-        deteccoes.append({
-            'classe': resultados[0].names[id_cls],
-            'confianca': round(float(caixa.conf[0]), 3),
-            'coordenadas': [int(v) for v in caixa.xyxy[0]]  # [x1, y1, x2, y2]
-        })
-
-    return deteccoes
-
-
-def contar_objetos(deteccoes, classe_alvo):
-    """Conta quantos objetos de um tipo específico (ex: 'person' ou 'bus') foram encontrados."""
-    return sum(1 for obj in deteccoes if obj['classe'] == classe_alvo)
-
-
-# Testando nossas funções na prática
-lista_detectada = detectar_objetos(url_imagem, limite_confianca=0.5)
-total_pessoas = contar_objetos(lista_detectada, 'person')
-
-print(f'Total de objetos encontrados na foto: {len(lista_detectada)}')
-print(f'Total de pessoas ("person") na foto:  {total_pessoas}')
-```
-
----
-
-#### Passo 4: Muito Além de Caixas — Segmentação e Pose
-
-Na biblioteca do YOLO, o mesmo código que você acabou de aprender também serve para recortar o formato exato dos objetos (**Segmentação**) ou mapear o esqueleto das pessoas (**Pose**). Basta mudar o final do nome do modelo:
-
-* `yolov8n.pt` → **Detecção** (desenha caixas)
-* `yolov8n-seg.pt` → **Segmentação** (pinta o contorno exato de cada objeto)
-* `yolov8n-pose.pt` → **Pose** (marca as articulações do corpo humano)
-
-```python
-# Carregando os modelos de Segmentação e de Pose
-modelo_seg = YOLO('yolov8n-seg.pt')
-modelo_pose = YOLO('yolov8n-pose.pt')
-
-res_seg = modelo_seg.predict(source=url_imagem, conf=0.40, verbose=False)[0]
-res_pose = modelo_pose.predict(source=url_imagem, conf=0.40, verbose=False)[0]
-
-# Exibindo os dois resultados lado a lado
-fig, ax = plt.subplots(1, 2, figsize=(14, 8))
-
-ax[0].set_title('Segmentação (Contorno Exato)')
-ax[0].imshow(cv2.cvtColor(res_seg.plot(), cv2.COLOR_BGR2RGB))
-ax[0].axis('off')
-
-ax[1].set_title('Estimativa de Pose (Esqueleto)')
-ax[1].imshow(cv2.cvtColor(res_pose.plot(), cv2.COLOR_BGR2RGB))
-ax[1].axis('off')
-
-plt.tight_layout()
-plt.show()
-```
-
----
-
-#### Passo 5: Detectando Objetos em Vídeos
-
-Um **vídeo** nada mais é do que várias fotos (chamadas de **quadros** ou *frames*) mostradas em sequência bem rápido (geralmente 30 fotos por segundo). Para usar o YOLO em um vídeo, basta abrir o arquivo com o OpenCV, passar um quadro de cada vez pelo modelo e salvar o vídeo resultante:
-
-```python
-def processar_video_yolo(caminho_entrada, caminho_saida='video_detectado.mp4', max_frames=150):
-    cap = cv2.VideoCapture(caminho_entrada)
-
-    # Descobre a largura, a altura e a velocidade (FPS) do vídeo original
-    largura = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    altura = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
-
-    # Prepara o arquivo onde o novo vídeo (com as caixas desenhadas) será salvo
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-    saida = cv2.VideoWriter(caminho_saida, fourcc, fps, (largura, altura))
-
-    frame_atual = 0
-    while cap.isOpened() and frame_atual < max_frames:
-        sucesso, frame_bgr = cap.read()
-        if not sucesso:
-            break
-
-        # Passa a foto atual (frame) pelo YOLO e desenha as caixas
-        resultado = modelo.predict(source=frame_bgr, conf=0.40, verbose=False)[0]
-        frame_anotado = resultado.plot()
-
-        saida.write(frame_anotado)
-        frame_atual += 1
-
-    cap.release()
-    saida.release()
-    print(f'Pronto! {frame_atual} quadros processados e salvos em: {caminho_saida}')
-```
+<p style="text-align: center; margin-top: 24px;">
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://colab.new" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+</p>
 
 ---
 

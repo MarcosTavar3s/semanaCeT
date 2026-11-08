@@ -12,3 +12,8 @@ venv/
 
 # MkDocs build output
 site/
+
+# Python files
+*.py
+*.ipynb
+*.pt
