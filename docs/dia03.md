@@ -123,7 +123,7 @@ Nesta prática final, vamos integrar tudo o que construímos no minicurso para c
 > 2. **Tempo de Resfriamento (*Cooldown*):** Guardar o horário do último envio (`time.time()`) e aguardar um intervalo mínimo ($\Delta t \ge 60\text{ s}$) antes de enviar um novo alerta da mesma classe.
 
 <p style="text-align: center; margin-top: 24px;">
-<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://colab.new" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://drive.google.com/file/d/1-HBRnHU6Ne_CRiGhuhaDFAetRy5eeMeG/view?usp=sharing" target="_blank">Clique aqui para abrir o projeto no Colab</a>
 </p>
 
 ---

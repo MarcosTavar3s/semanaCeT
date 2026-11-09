@@ -163,7 +163,7 @@ Nesta prática, vamos construir passo a passo no **Google Colab** um **Editor de
 > **Dica:** Este material utiliza a biblioteca **OpenCV** como referência. Caso queira consultar os comandos equivalentes na biblioteca **Pillow (PIL)**, acesse o guia comparativo do <a href="https://codoraven.com/category/tutorials/opencv-vs-pillow/" target="_blank">CodoRaven</a>.
 
 <p style="text-align: center; margin-top: 24px;">
-<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://colab.new" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://drive.google.com/file/d/1iA4LbtCPuF58pyg6I165Oxbni8ktTWKg/view?usp=sharing" target="_blank">Clique aqui para abrir o projeto no Colab</a>
 </p>
 
 ---

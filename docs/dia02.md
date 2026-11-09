@@ -457,7 +457,7 @@ Chegou a hora de colocar a mão na massa! No nosso notebook prático no **Google
 5. **Processamento de Vídeos (*Frame a Frame*):** leitura de vídeos com `cv2.VideoCapture`, detecção quadro a quadro e exportação do vídeo anotado com `cv2.VideoWriter`.
 
 <p style="text-align: center; margin-top: 24px;">
-<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://colab.new" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://drive.google.com/file/d/1U-hymZNRsirs_-WRP_84XopVnCX-MxXD/view?usp=sharing" target="_blank">Clique aqui para abrir o projeto no Colab</a>
 </p>
 
 ---
