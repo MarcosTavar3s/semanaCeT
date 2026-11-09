@@ -468,6 +468,8 @@ Chegou a hora de colocar a mão na massa! No nosso notebook prático no **Google
 
 #### 📚 Ferramentas visuais e links úteis
 
+* <a href="https://heltonmaia.com/computervision/intro.html" target="_blank">Prof. Helton Maia — Material de Visão Computacional</a>
+* <a href="https://heltonmaia.com/playground/imagem.html?aba=equalizacao" target="_blank">Prof. Helton Maia — Playground Interativo de Processamento de Imagens</a>
 * <a href="https://poloclub.github.io/cnn-explainer/" target="_blank">CNN Explainer — Veja uma Rede Neural Convolucional funcionando por dentro de forma visual e interativa no navegador</a>
 * <a href="https://playground.tensorflow.org/" target="_blank">TensorFlow Playground — Simulador interativo para brincar com redes neurais sem precisar programar</a>
 * <a href="https://docs.ultralytics.com/pt/" target="_blank">Documentação Oficial da Ultralytics YOLO (em Português)</a>

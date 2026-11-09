@@ -174,6 +174,8 @@ Nesta prática, vamos construir passo a passo no **Google Colab** um **Editor de
 
 #### 📚 Materiais e artigos sugeridos
 
+* <a href="https://heltonmaia.com/computervision/intro.html" target="_blank">Prof. Helton Maia — Material de Visão Computacional</a>
+* <a href="https://heltonmaia.com/playground/imagem.html?aba=equalizacao" target="_blank">Prof. Helton Maia — Playground Interativo de Processamento de Imagens</a>
 * <a href="https://docs.opencv.org/4.x/d2/d96/tutorial_py_table_of_contents_imgproc.html" target="_blank">Documentação Oficial do OpenCV — Image Processing in OpenCV (Python)</a>
 * <a href="https://codoraven.com/category/tutorials/opencv-vs-pillow/" target="_blank">CodoRaven — Comparativo prático entre OpenCV e Pillow</a>
 
