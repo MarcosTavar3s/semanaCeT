@@ -28,6 +28,14 @@ Se tentarmos criar regras manuais (como *"se tiver quatro rodas e for vermelho, 
 
 Para resolver isso, usamos **Redes Neurais Artificiais**: em vez de um programador escrever as regras no código, nós mostramos milhares de fotos de exemplo para o computador e **ele mesmo aprende a reconhecer os padrões visuais**.
 
+#### 🕰️ Antes vs. Depois das Redes Neurais Convolucionais (CNNs)
+
+Antes do avanço das **CNNs**, os algoritmos clássicos de Visão Computacional dependiam da **extração manual de características** (*Feature Engineering*). Engenheiros precisavam projetar à mão algoritmos matemáticos (como *SIFT*, *HOG* ou filtros de bordas) para medir cantos, texturas e contornos e só depois enviar esses números para um classificador simples. Se a iluminação mudasse ou o objeto aparecesse em outro ângulo, o sistema facilmente falhava.
+
+Com as **Redes Neurais Convolucionais (CNNs)**, o aprendizado passou a ser **fim a fim (*end-to-end*)**: entregamos a imagem bruta diretamente para a rede e ela aprende sozinha tanto os melhores filtros visuais quanto a decisão final!
+
+<img src="../assets/images/antes_depois_cnn.png" alt="Infográfico comparativo da Visão Computacional Antes vs. Depois das CNNs: na visão clássica, a extração manual de características (SIFT, HOG, filtros de bordas) levava a um classificador simples e frágil a variações de luz e ângulo; com Deep Learning e CNNs, a própria rede aprende as características de ponta a ponta para uma detecção robusta">
+
 #### Como o computador "enxerga" uma imagem em camadas?
 
 Na Visão Computacional, o tipo de rede neural mais famoso é a **Rede Neural Convolucional** (ou **CNN**).
@@ -444,7 +452,75 @@ Além disso, o YOLO é disponibilizado em **5 tamanhos diferentes** (indicados p
 
 ---
 
-### 💻 4. Prática: Identificando Objetos em Imagens e Vídeos com YOLO
+### 🏷️ 4. Como ensinar novos objetos ao YOLO? (Datasets, Anotação e Fine-Tuning)
+
+---
+
+O modelo padrão do YOLO já reconhece $80$ objetos do cotidiano, mas e se você quiser criar um projeto para detectar **capacetes de segurança (EPIs)** em uma obra, **pragas agrícolas** em uma plantação, **placas de trânsito brasileiras** ou **defeitos em peças industriais**?
+
+Para isso, não precisamos criar nem treinar uma rede neural do zero (o que exigiria milhões de fotos e semanas de supercomputadores). Nós usamos uma técnica chamada ***Fine-Tuning*** (**Ajuste Fino** ou *Transfer Learning*): pegamos um YOLO que já sabe "enxergar" bordas, formas e texturas muito bem e apenas **especializamos as últimas camadas dele** com exemplos dos nossos próprios objetos!
+
+Esse processo funciona em **3 etapas práticas**:
+
+#### Passo 1: Onde conseguir as imagens? (Datasets Prontos vs. Próprias Fotos)
+
+Antes de sair tirando fotos e desenhando caixas manualmente, vale uma regra de ouro: **verifique se alguém já montou esse banco de imagens (*dataset*) antes!**
+
+* **Usando Datasets Prontos (Caminho Rápido):** Plataformas gratuitas da comunidade reúnem milhares de datasets já fotografados e anotados no formato exato do YOLO, prontos para baixar e treinar:
+    * [**Kaggle**](https://www.kaggle.com/datasets): A maior comunidade de Ciência de Dados do mundo. Basta pesquisar, por exemplo, *"helmet detection yolo"* ou *"pothole detection"* (buracos na pista) para encontrar bases completas.
+    * [**Roboflow Universe**](https://universe.roboflow.com/): O maior repositório público focado exclusivamente em Visão Computacional, com centenas de milhares de datasets que já podem ser exportados diretamente para `YOLOv8` / `YOLO11`.
+* **Criando seu Próprio Dataset:** Se o seu problema for muito específico (como um produto exclusivo da sua fábrica ou empresa), basta coletar entre **$100$ e $500$ fotos variadas** por classe — mudando ângulos, iluminação e cenários para o modelo não "decorar" apenas um fundo.
+
+#### Passo 2: Anotação de Dados (*Data Labeling*)
+
+Se você tirou suas próprias fotos, precisa mostrar ao YOLO onde está o objeto em cada imagem. Esse trabalho de desenhar as caixas delimitadoras (*Bounding Boxes*) ou contornos e dar nome a cada classe é chamado de **Anotação de Dados** (ou *Rotulagem*).
+
+Hoje existem ferramentas gratuitas e visuais que tornam isso muito rápido (algumas até usam IA para pré-desenhar as caixas automaticamente para você):
+
+* **Roboflow Annotate:** Funciona direto no navegador, organiza a divisão de treino/validação e exporta a pasta pronta para o Google Colab.
+* **CVAT (*Computer Vision Annotation Tool*) e Label Studio:** Ferramentas profissionais de código aberto excelentes para anotar imagens e vídeos em equipe.
+* **LabelImg / MakeSense.ai:** Opções leves e gratuitas para marcar caixas rapidamente sem precisar instalar programas pesados.
+
+=== "O que a ferramenta de anotação gera?"
+
+    Para cada foto (ex.: `obra_01.jpg`), a ferramenta cria um arquivo de texto com o mesmo nome (`obra_01.txt`). Cada linha desse arquivo representa um objeto marcado na foto, com os valores padronizados entre $0$ e $1$:
+
+    ```text
+    # Formato YOLO: <id_da_classe> <x_centro> <y_centro> <largura> <altura>
+    0 0.512 0.384 0.140 0.210
+    1 0.498 0.215 0.085 0.092
+    ```
+
+    Além disso, um arquivo chamado **`data.yaml`** funciona como o "mapa" do dataset, informando ao YOLO onde estão as pastas de treino e quais são os nomes das classes:
+
+    ```yaml
+    train: ../train/images
+    val: ../valid/images
+
+    nc: 2 # Número de classes
+    names: ['trabalhador', 'capacete']
+    ```
+
+#### Passo 3: O Fine-Tuning na Prática (Apenas 3 linhas de código!)
+
+Com o dataset organizado e o arquivo `data.yaml` em mãos, a biblioteca `ultralytics` faz todo o trabalho pesado de ajuste fino com pouquíssimas linhas em Python (recomendado rodar com **GPU T4 gratuita** ativada no Google Colab):
+
+```python
+from ultralytics import YOLO
+
+# 1. Carregamos o modelo base pré-treinado (que já sabe enxergar formas gerais)
+modelo = YOLO("yolov8n.pt")
+
+# 2. Fazemos o Fine-Tuning (ajuste fino) com o nosso próprio dataset!
+# epochs = quantas vezes o modelo vai estudar o conjunto de fotos (ex: 50 ciclos)
+modelo.train(data="caminho/para/data.yaml", epochs=50, imgsz=640)
+```
+
+Ao final do treinamento, o YOLO salva automaticamente o seu novo modelo personalizado dentro da pasta `runs/detect/train/weights/best.pt`. A partir daí, basta carregá-lo normalmente com `YOLO("best.pt")` e usá-lo em fotos, vídeos ou câmeras ao vivo!
+
+---
+
+### 💻 5. Prática: Identificando Objetos em Imagens e Vídeos com YOLO
 
 ---
 
