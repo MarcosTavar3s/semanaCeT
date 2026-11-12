@@ -30,6 +30,26 @@ Nos **Dias 01 e 02**, aprendemos a manipular pixels e a utilizar modelos como o 
 * **Combinação de técnicas:** Um agente pode combinar modelos de aprendizado de máquina (como redes neurais), regras de negócio e funções Python. **Nem todo agente precisa usar um Modelo de Linguagem (LLM)** — agentes baseados em regras ou políticas determinísticas são rápidos, previsíveis e amplamente usados na indústria.
 * **Agente de Visão (*Vision Agent*):** Utiliza imagens ou vídeos como **observações** do ambiente. Enquanto um detector comum apenas lista os objetos identificados, o agente de visão usa essas detecções para escolher verificações adicionais, acionar ferramentas externas e decidir o próximo passo.
 
+#### Recursos Disponíveis em um Agente: *Tools*, *Skills* e Contexto
+
+Para que um agente consiga ir além de apenas processar dados e passe a resolver problemas reais, ele se apoia em três pilares principais de recursos:
+
+<img src="../assets/images/recursos_agentes_tools_skills.png" alt="Diagrama dos recursos de um Agente de IA comparando Tools (ferramentas atômicas que o agente executa), Skills (habilidades e fluxos de trabalho que o agente sabe fazer) e a base de Contexto, Memória e Regras">
+
+=== "Tools (Ferramentas — O que o agente EXECUTA)"
+
+    * **Papel:** São funções atômicas, APIs externas ou integrações que permitem ao agente interagir diretamente com o mundo externo (ler sensores, rodar um modelo, consultar um banco de dados ou enviar uma mensagem).
+    * **No nosso projeto:** Funções como `detectar_objetos()`, `contar_objetos()`, `verificar_condicao()` e `enviar_alerta()` expostas via Python/MCP.
+
+=== "Skills (Habilidades — Como o agente SABE FAZER)"
+
+    * **Papel:** São fluxos de trabalho estruturados, instruções passo a passo e boas práticas reutilizáveis que ensinam o agente a combinar múltiplas *Tools* para cumprir uma tarefa complexa.
+    * **No nosso projeto:** A rotina completa de monitoramento de câmera — que coordena a comparação antes/depois, aplica confirmação temporal (*debounce*) e decide quando notificar a equipe.
+
+=== "Contexto, Memória e Regras (Base de Suporte)"
+
+    * **Papel:** Reúne os *prompts* do sistema, o histórico de observações anteriores (como a contagem de objetos no quadro passado) e as regras de negócio que guiam as decisões do agente.
+
 ---
 
 ### ⚖️ 2. Bot vs. Agente e Níveis de Autonomia
@@ -117,13 +137,14 @@ Nesta prática final, vamos integrar tudo o que construímos no minicurso para c
     * Como essa opção exige acesso a um provedor de modelo e uma chave de API (`API Key`), ela é opcional e não é necessária para executar a versão básica do minicurso.
 
 > **💡 Dica para o mundo real (Evitando Flood de Alertas em Vídeos):**
-> Se você conectar esse agente a uma câmera ao vivo (usando o loop de vídeo do **Dia 02**), uma pessoa caminhando na cena aparecerá em $30\text{ quadros/s}$ — o que dispararia $30$ mensagens seguidas no Telegram! Em sistemas reais, adicionamos duas regras simples na política do agente:
+> Se você conectar esse agente a uma câmera ao vivo (usando o loop de vídeo do **Dia 02**), uma pessoa caminhando na cena aparecerá em $30\text{ quadros/s}$ — o que dispararia $30$ mensagens seguidas no Telegram! Em sistemas reais, adicionamos 
+duas regras simples na política do agente:
 >
 > 1. **Confirmação Temporal (*Debounce*):** Só confirmar a mudança se a nova contagem se mantiver por pelo menos $N$ quadros consecutivos (evita falsos positivos de um único frame borrado).
 > 2. **Tempo de Resfriamento (*Cooldown*):** Guardar o horário do último envio (`time.time()`) e aguardar um intervalo mínimo ($\Delta t \ge 60\text{ s}$) antes de enviar um novo alerta da mesma classe.
 
 <p style="text-align: center; margin-top: 24px;">
-<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://drive.google.com/file/d/1-HBRnHU6Ne_CRiGhuhaDFAetRy5eeMeG/view?usp=sharing" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://www.kaggle.com/code/marcostavar3s/pratica-dia03" target="_blank">Clique aqui para abrir o projeto no Kaggle</a>
 </p>
 
 ---
@@ -233,3 +254,16 @@ Copie e cole os prompts abaixo no seu assistente de IA favorito para aprofundar 
 
 3. **Integrando Visão Computacional com Bot do Telegram:**
    > *"Como criar um bot no Telegram usando o @BotFather, obter o Token e o Chat ID, e enviar tanto mensagens de texto quanto imagens anotadas pelo OpenCV/YOLO em Python usando a biblioteca requests? Mostre o código passo a passo e explique boas práticas para evitar enviar múltiplos alertas repetidos em vídeos."*
+
+---
+
+### 📝 Avaliação do Minicurso
+
+---
+
+Sua opinião é fundamental para melhorarmos as próximas edições! Por favor, reserve um minuto para responder ao formulário de avaliação do minicurso:
+
+<p style="text-align: center; margin-top: 24px;">
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://docs.google.com/forms/d/e/1FAIpQLScTE2CBs1sFmp4vstwd9GpI1_JE6xj0tbbvTQc2HzCcdCVX7g/viewform" target="_blank">Clique aqui para responder ao Formulário de Avaliação</a>
+</p>
+
