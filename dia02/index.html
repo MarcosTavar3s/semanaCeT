@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <title>Modelos de Visão Computacional - BootCamp - Visão Computacional + IA na prática
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://marcostavar3s.github.io/semanaC-T/dia02/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    
+    <link href="../assets/stylesheets/extra.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">BootCamp - Visão Computacional + IA na prática</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Início]</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class=" active 
+                            nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Material]</a>
+                            <ul class="dropdown-menu">
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia01/" class="dropdown-item text-decoration-none ">Fundamentos de imagens digitais</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Modelos de Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia03/" class="dropdown-item text-decoration-none ">Agentes + Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../contatos/">[Contatos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main>
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Modelos de Visão Computacional</h1>
+            
+        </header>
+        
+        
+        
+        <p><h1 id="modelos-de-visao-computacional-e-yolo">Modelos de Visão Computacional e YOLO</h1>
+<hr />
+<h3 id="ferramentas-utilizadas">🛠️ Ferramentas Utilizadas</h3>
+<hr />
+<div style="inline-flex">
+<a href="https://colab.new" target="_blank"><img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Google Colab"></a>
+<img src="https://img.shields.io/badge/Ultralytics%20YOLO-111F68?style=for-the-badge&logo=yolo&logoColor=white" alt="Ultralytics YOLO">
+<img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+<img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+</div>
+
+<hr />
+<h3 id="1-dos-filtros-manuais-ao-aprendizado-automatico">🧠 1. Dos Filtros Manuais ao Aprendizado Automático</h3>
+<hr />
+<p>No <strong>Dia 01</strong>, vimos que uma imagem digital é apenas uma tabela cheia de números (os <strong>pixels</strong>) e que podemos aplicar <strong>filtros manuais</strong> para destacar bordas, mudar cores ou borrar uma foto.</p>
+<p>Mas pare para pensar: <strong>como ensinar o computador a reconhecer um cachorro, um carro ou uma pessoa?</strong></p>
+<p>Se tentarmos criar regras manuais (como <em>"se tiver quatro rodas e for vermelho, é um carro"</em>), nosso programa vai falhar rapidamente. Afinal, um carro pode ser azul, estar de frente (onde só vemos duas rodas), estar no escuro ou parcialmente escondido atrás de uma árvore.</p>
+<p>Para resolver isso, usamos <strong>Redes Neurais Artificiais</strong>: em vez de um programador escrever as regras no código, nós mostramos milhares de fotos de exemplo para o computador e <strong>ele mesmo aprende a reconhecer os padrões visuais</strong>.</p>
+<h4 id="antes-vs-depois-das-redes-neurais-convolucionais-cnns">🕰️ Antes vs. Depois das Redes Neurais Convolucionais (CNNs)</h4>
+<p>Antes do avanço das <strong>CNNs</strong>, os algoritmos clássicos de Visão Computacional dependiam da <strong>extração manual de características</strong> (<em>Feature Engineering</em>). Engenheiros precisavam projetar à mão algoritmos matemáticos (como <em>SIFT</em>, <em>HOG</em> ou filtros de bordas) para medir cantos, texturas e contornos e só depois enviar esses números para um classificador simples. Se a iluminação mudasse ou o objeto aparecesse em outro ângulo, o sistema facilmente falhava.</p>
+<p>Com as <strong>Redes Neurais Convolucionais (CNNs)</strong>, o aprendizado passou a ser <strong>fim a fim (<em>end-to-end</em>)</strong>: entregamos a imagem bruta diretamente para a rede e ela aprende sozinha tanto os melhores filtros visuais quanto a decisão final!</p>
+<p><img src="../assets/images/antes_depois_cnn.png" alt="Infográfico comparativo da Visão Computacional Antes vs. Depois das CNNs: na visão clássica, a extração manual de características (SIFT, HOG, filtros de bordas) levava a um classificador simples e frágil a variações de luz e ângulo; com Deep Learning e CNNs, a própria rede aprende as características de ponta a ponta para uma detecção robusta"></p>
+<h4 id="como-o-computador-enxerga-uma-imagem-em-camadas">Como o computador "enxerga" uma imagem em camadas?</h4>
+<p>Na Visão Computacional, o tipo de rede neural mais famoso é a <strong>Rede Neural Convolucional</strong> (ou <strong>CNN</strong>).</p>
+<p>Lembra dos filtros do Dia 01 que deslizavam pela imagem procurando bordas? A CNN usa essa exata mesma ideia, mas com um superpoder: <strong>a própria rede descobre sozinha quais filtros deve usar</strong> durante o treinamento, construindo o entendimento da imagem em etapas, do mais simples ao mais complexo:</p>
+<p><img src="../assets/images/cnn_camadas.png" alt="Infográfico mostrando como uma Rede Neural Convolucional (CNN) enxerga uma imagem em camadas: Imagem Original (pixels brutos), 1ª Etapa (traços básicos, bordas e linhas), 2ª Etapa (partes de objetos como rodas, faróis e janelas) e 3ª Etapa (objeto completo identificado como Carro: 96%)"></p>
+<ul>
+<li><strong>1ª Etapa (Traços básicos):</strong> As primeiras camadas funcionam como detetives procurando apenas linhas retas, curvas simples e mudanças de cor.</li>
+<li><strong>2ª Etapa (Partes de objetos):</strong> As camadas seguintes juntam esses traços para reconhecer formas menores, como uma roda, uma orelha, uma janela ou um olho.</li>
+<li><strong>3ª Etapa (O objeto completo):</strong> Por fim, as últimas camadas combinam todas essas pistas (<em>"tem rodas + tem faróis + tem formato de veículo"</em>) para concluir com alta certeza: <strong>é um carro!</strong></li>
+</ul>
+<h4 id="simulador-animado-veja-uma-cnn-funcionando-por-dentro">🎬 Simulador Animado: Veja uma CNN funcionando por dentro!</h4>
+<p>Em cada posição da imagem, o <strong>Filtro (Kernel)</strong> <span class="arithmatex">\(K\)</span> de dimensão <span class="arithmatex">\(3 \times 3\)</span> multiplica os pixels vizinhos <span class="arithmatex">\(I\)</span> pelos seus pesos, soma os resultados e aplica a função de ativação <span class="arithmatex">\(\text{ReLU}\)</span> (que zera valores negativos):</p>
+<div class="arithmatex">\[z = \sum_{i,j} I(x+i, y+j) \cdot K(i,j) \implies \text{ReLU}(z) = \max(0, z)\]</div>
+<p>Observe na animação interativa abaixo como o <strong>Filtro (Kernel)</strong> desliza sobre os pixels da imagem calculando o <strong>Mapa de Características (<em>Feature Map</em>)</strong> e ativando as camadas da rede até identificar o objeto. Você pode <strong>pausar</strong>, avançar <strong>passo a passo</strong>, <strong>clicar em qualquer célula</strong> do mapa ou <strong>trocar o filtro</strong>!</p>
+<div class="cnn-sim-wrapper" id="cnn-simulator">
+  <div class="cnn-sim-header">
+    <div class="cnn-sim-title">⚡ Convolução e Camadas da CNN em Tempo Real</div>
+    <div class="cnn-sim-controls">
+      <select id="cnn-filter-select" class="cnn-sim-select" aria-label="Selecionar filtro da CNN">
+        <option value="horizontal">Filtro 1: Bordas Horizontais (Teto/Chassi)</option>
+        <option value="vertical">Filtro 2: Bordas Verticais (Para-choques)</option>
+        <option value="wheel">Filtro 3: Contorno Circular / Roda</option>
+      </select>
+      <button type="button" id="cnn-btn-play" class="cnn-sim-btn active">⏸️ Pausar</button>
+      <button type="button" id="cnn-btn-step" class="cnn-sim-btn">⏭️ Passo</button>
+      <button type="button" id="cnn-btn-speed" class="cnn-sim-btn">🐢 Velocidade: Normal</button>
+    </div>
+  </div>
+  <div class="cnn-sim-stage">
+    <div class="cnn-panel">
+      <div>
+        <div class="cnn-panel-title">1. Imagem de Entrada (Pixels 7×7)</div>
+        <div class="cnn-panel-sub">Janela amarela (3×3) deslizando sobre o veículo</div>
+      </div>
+      <div id="cnn-input-grid" class="cnn-grid-input"></div>
+      <div id="cnn-pos-info" class="cnn-math-box">Posição da janela: (linha 0, col 0)</div>
+    </div>
+    <div class="cnn-panel">
+      <div>
+        <div class="cnn-panel-title">2. Filtro Aprendido (Kernel 3×3)</div>
+        <div class="cnn-panel-sub">Multiplica cada pixel pelo peso e soma tudo</div>
+      </div>
+      <div id="cnn-kernel-grid" class="cnn-grid-kernel"></div>
+      <div id="cnn-calc-info" class="cnn-math-box">Soma (Pixel × Peso) = 0 → ReLU = 0</div>
+    </div>
+    <div class="cnn-panel">
+      <div>
+        <div class="cnn-panel-title">3. Mapa de Características (5×5)</div>
+        <div class="cnn-panel-sub">Brilho ciano = onde o padrão foi encontrado!</div>
+      </div>
+      <div id="cnn-output-grid" class="cnn-grid-output"></div>
+      <div id="cnn-activation-info" class="cnn-math-box">Clique em uma célula para inspecionar</div>
+    </div>
+  </div>
+  <div class="cnn-layers-pipeline">
+    <div class="cnn-layer-step" id="cnn-step-0">
+      <div class="cnn-layer-badge">Entrada</div>
+      <div class="cnn-layer-name">Matriz de Pixels</div>
+      <div class="cnn-layer-desc">Valores numéricos brutos de brilho da imagem (0 a 9).</div>
+    </div>
+    <div class="cnn-layer-step" id="cnn-step-1">
+      <div class="cnn-layer-badge">1ª Camada (Conv + ReLU)</div>
+      <div class="cnn-layer-name">Traços e Bordas</div>
+      <div class="cnn-layer-desc">O filtro desliza destacando retas e contornos fortes.</div>
+    </div>
+    <div class="cnn-layer-step" id="cnn-step-2">
+      <div class="cnn-layer-badge">2ª Camada (Pooling)</div>
+      <div class="cnn-layer-name">Partes do Objeto</div>
+      <div class="cnn-layer-desc">Combina bordas em rodas, capô, teto e janelas.</div>
+    </div>
+    <div class="cnn-layer-step" id="cnn-step-3">
+      <div class="cnn-layer-badge">3ª Camada (Saída)</div>
+      <div class="cnn-layer-name" id="cnn-pred-label">🚗 Carro: 96%</div>
+      <div class="cnn-layer-desc">Decisão final combinando todas as pistas visuais:</div>
+      <div class="cnn-prob-bar-bg"><div id="cnn-prob-bar" class="cnn-prob-bar-fill"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const inputImage = [
+    [0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 6, 8, 6, 0, 0],
+    [0, 5, 9, 9, 9, 6, 0],
+    [4, 9, 9, 9, 9, 9, 5],
+    [4, 8, 4, 8, 4, 8, 4],
+    [0, 9, 0, 0, 0, 9, 0],
+    [0, 0, 0, 0, 0, 0, 0]
+  ];
+  const kernels = {
+    horizontal: {
+      weights: [
+        [-1, -1, -1],
+        [ 2,  2,  2],
+        [-1, -1, -1]
+      ],
+      label: "Bordas Horizontais"
+    },
+    vertical: {
+      weights: [
+        [-1,  2, -1],
+        [-1,  2, -1],
+        [-1,  2, -1]
+      ],
+      label: "Bordas Verticais"
+    },
+    wheel: {
+      weights: [
+        [-1,  1, -1],
+        [ 1,  3,  1],
+        [-1,  1, -1]
+      ],
+      label: "Destaque de Roda/Centro"
+    }
+  };
+  let currentFilter = "horizontal";
+  let stepIndex = 0;
+  let isPlaying = true;
+  let speedIndex = 1;
+  const speeds = [
+    { ms: 950, label: "🐢 Velocidade: Lenta" },
+    { ms: 520, label: "⚡ Velocidade: Normal" },
+    { ms: 240, label: "🚀 Velocidade: Rápida" }
+  ];
+  let timer = null;
+  const inputGridEl = document.getElementById("cnn-input-grid");
+  const kernelGridEl = document.getElementById("cnn-kernel-grid");
+  const outputGridEl = document.getElementById("cnn-output-grid");
+  const posInfoEl = document.getElementById("cnn-pos-info");
+  const calcInfoEl = document.getElementById("cnn-calc-info");
+  const actInfoEl = document.getElementById("cnn-activation-info");
+  const filterSelectEl = document.getElementById("cnn-filter-select");
+  const btnPlayEl = document.getElementById("cnn-btn-play");
+  const btnStepEl = document.getElementById("cnn-btn-step");
+  const btnSpeedEl = document.getElementById("cnn-btn-speed");
+  const probBarEl = document.getElementById("cnn-prob-bar");
+  const predLabelEl = document.getElementById("cnn-pred-label");
+  if (!inputGridEl || !kernelGridEl || !outputGridEl) return;
+  function computeConv(outR, outC, weights) {
+    let rawSum = 0;
+    for (let kr = 0; kr < 3; kr++) {
+      for (let kc = 0; kc < 3; kc++) {
+        rawSum += inputImage[outR + kr][outC + kc] * weights[kr][kc];
+      }
+    }
+    const relu = Math.max(0, rawSum);
+    return { rawSum, relu };
+  }
+  function renderGrids() {
+    const outR = Math.floor(stepIndex / 5);
+    const outC = stepIndex % 5;
+    const weights = kernels[currentFilter].weights;
+    inputGridEl.innerHTML = "";
+    for (let r = 0; r < 7; r++) {
+      for (let c = 0; c < 7; c++) {
+        const val = inputImage[r][c];
+        const cell = document.createElement("div");
+        const inWin = (r >= outR && r < outR + 3 && c >= outC && c < outC + 3);
+        cell.className = "cnn-cell" + (inWin ? " in-window" : "");
+        const intensity = Math.round((val / 9) * 210);
+        cell.style.backgroundColor = val > 0 ? `rgb(${Math.round(intensity * 0.25)}, ${Math.round(intensity * 0.78)}, ${intensity})` : "#0b192c";
+        cell.style.color = val >= 6 ? "#020617" : "#cbd5e1";
+        cell.textContent = val;
+        inputGridEl.appendChild(cell);
+      }
+    }
+    kernelGridEl.innerHTML = "";
+    for (let kr = 0; kr < 3; kr++) {
+      for (let kc = 0; kc < 3; kc++) {
+        const w = weights[kr][kc];
+        const p = inputImage[outR + kr][outC + kc];
+        const cell = document.createElement("div");
+        cell.className = "cnn-cell";
+        cell.style.backgroundColor = w > 0 ? "rgba(6, 228, 217, 0.28)" : "rgba(244, 63, 94, 0.22)";
+        cell.style.color = w > 0 ? "#06e4d9" : "#fda4af";
+        cell.textContent = `${p}×(${w})`;
+        kernelGridEl.appendChild(cell);
+      }
+    }
+    outputGridEl.innerHTML = "";
+    let maxVal = 1;
+    const allValues = [];
+    for (let r = 0; r < 5; r++) {
+      for (let c = 0; c < 5; c++) {
+        const res = computeConv(r, c, weights);
+        allValues.push(res);
+        if (res.relu > maxVal) maxVal = res.relu;
+      }
+    }
+    for (let idx = 0; idx < 25; idx++) {
+      const r = Math.floor(idx / 5);
+      const c = idx % 5;
+      const cell = document.createElement("div");
+      const isCurrent = idx === stepIndex;
+      const isComputed = idx <= stepIndex;
+      cell.className = "cnn-cell" + (isCurrent ? " active-out" : "");
+      cell.style.cursor = "pointer";
+      if (isComputed) {
+        const val = allValues[idx].relu;
+        const ratio = val / maxVal;
+        const g = Math.round(40 + ratio * 188);
+        const b = Math.round(65 + ratio * 152);
+        cell.style.backgroundColor = val > 0 ? `rgb(6, ${g}, ${b})` : "#0f172a";
+        cell.style.color = ratio > 0.55 ? "#020617" : "#e2e8f0";
+        cell.textContent = val;
+      } else {
+        cell.style.backgroundColor = "#091326";
+        cell.style.color = "#475569";
+        cell.textContent = "·";
+      }
+      cell.addEventListener("click", function() {
+        pauseSim();
+        stepIndex = idx;
+        renderGrids();
+      });
+      outputGridEl.appendChild(cell);
+    }
+    const currentRes = allValues[stepIndex];
+    posInfoEl.textContent = `Janela 3×3 na linha ${outR + 1}, coluna ${outC + 1} (Passo ${stepIndex + 1}/25)`;
+    calcInfoEl.textContent = `Soma = ${currentRes.rawSum} ──► ReLU max(0, ${currentRes.rawSum}) = ${currentRes.relu}`;
+    actInfoEl.textContent = currentRes.relu >= 12
+      ? `🔥 Forte ativação (${currentRes.relu}): padrão detectado aqui!`
+      : (currentRes.relu > 0 ? `✨ Ativação moderada (${currentRes.relu})` : `⚪ Sem ativação (0): fundo ou padrão ausente`);
+    const progress = Math.round(((stepIndex + 1) / 25) * 96);
+    probBarEl.style.width = `${progress}%`;
+    predLabelEl.textContent = `🚗 Carro: ${progress}%`;
+    const activeStage = stepIndex < 6 ? 0 : (stepIndex < 14 ? 1 : (stepIndex < 21 ? 2 : 3));
+    for (let s = 0; s < 4; s++) {
+      const el = document.getElementById(`cnn-step-${s}`);
+      if (el) {
+        el.classList.toggle("highlight", s === activeStage);
+      }
+    }
+  }
+  function nextStep() {
+    stepIndex = (stepIndex + 1) % 25;
+    renderGrids();
+  }
+  function startSim() {
+    if (timer) clearInterval(timer);
+    isPlaying = true;
+    btnPlayEl.textContent = "⏸️ Pausar";
+    btnPlayEl.classList.add("active");
+    timer = setInterval(nextStep, speeds[speedIndex].ms);
+  }
+  function pauseSim() {
+    if (timer) clearInterval(timer);
+    timer = null;
+    isPlaying = false;
+    btnPlayEl.textContent = "▶️ Continuar";
+    btnPlayEl.classList.remove("active");
+  }
+  btnPlayEl.addEventListener("click", function() {
+    if (isPlaying) pauseSim();
+    else startSim();
+  });
+  btnStepEl.addEventListener("click", function() {
+    pauseSim();
+    nextStep();
+  });
+  btnSpeedEl.addEventListener("click", function() {
+    speedIndex = (speedIndex + 1) % speeds.length;
+    btnSpeedEl.textContent = speeds[speedIndex].label;
+    if (isPlaying) startSim();
+  });
+  filterSelectEl.addEventListener("change", function(e) {
+    currentFilter = e.target.value;
+    stepIndex = 0;
+    renderGrids();
+  });
+  renderGrids();
+  startSim();
+})();
+</script>
+
+<hr />
+<h3 id="2-o-que-a-visao-computacional-consegue-fazer">🎯 2. O que a Visão Computacional consegue fazer?</h3>
+<hr />
+<p>Dependendo do problema que queremos resolver no mundo real, podemos pedir para o modelo responder a diferentes perguntas sobre uma imagem. Veja as <strong>4 tarefas principais</strong>:</p>
+<p><img src="../assets/images/tarefas_visao_computacional.png" alt="Infográfico comparativo das 4 tarefas principais da Visão Computacional: 1. Classificação, 2. Detecção de Objetos, 3. Segmentação e 4. Estimativa de Pose"></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">1. Classificação</label><label for="__tabbed_1_2">2. Detecção de Objetos</label><label for="__tabbed_1_3">3. Segmentação</label><label for="__tabbed_1_4">4. Estimativa de Pose</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>A pergunta:</strong> <em>"Qual é o tema principal desta foto?"</em></li>
+<li><strong>Como funciona:</strong> O modelo olha para a imagem inteira e devolve apenas uma etiqueta (classe) geral.</li>
+<li><strong>Exemplo:</strong> Dizer se uma foto é de um <code>gato</code> ou de um <code>cachorro</code>.</li>
+<li><strong>Limitação:</strong> Se houver três gatos e duas pessoas na mesma foto, a classificação simples não diz <strong>onde</strong> cada um está nem <strong>quantos</strong> são.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>A pergunta:</strong> <em>"Quais objetos estão na foto e <strong>onde</strong> está cada um?"</em></li>
+<li><strong>Como funciona:</strong> O modelo desenha um retângulo — chamado de <strong>Caixa Delimitadora (<em>Bounding Box</em>)</strong> — ao redor de cada objeto encontrado, informando o nome do objeto e a porcentagem de certeza.</li>
+<li><strong>Exemplo:</strong> Contar quantas pessoas, carros e semáforos aparecem em uma câmera de trânsito.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>A pergunta:</strong> <em>"Qual é o contorno exato de cada objeto?"</em></li>
+<li><strong>Como funciona:</strong> Em vez de apenas desenhar um retângulo ao redor, o modelo pinta exatamente os pixels que pertencem a cada objeto (como se recortasse o objeto com uma tesoura mágica).</li>
+<li><strong>Exemplo:</strong> Separar a área exata da pista em carros autônomos ou medir o tamanho exato de uma folha na agricultura.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>A pergunta:</strong> <em>"Em que posição está o corpo desta pessoa?"</em></li>
+<li><strong>Como funciona:</strong> O modelo localiza pontos estratégicos do corpo (ombros, cotovelos, mãos, joelhos) e liga esses pontos formando um "esqueleto".</li>
+<li><strong>Exemplo:</strong> Analisar se um trabalhador está com a postura correta, acompanhar exercícios físicos ou detectar se um idoso sofreu uma queda.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="3-o-que-e-o-yolo-e-por-que-ele-revolucionou-a-area">⚡ 3. O que é o YOLO e por que ele revolucionou a área?</h3>
+<hr />
+<p>Antigamente, detectar objetos em uma foto era um processo muito lento. Os algoritmos funcionavam como alguém procurando um objeto no escuro com uma lanterna pequena: eles recortavam milhares de pedacinhos da imagem e analisavam um por um (<em>"Tem um carro neste canto? Não. E um pouco mais para o lado? Também não..."</em>).</p>
+<p>Por causa disso, analisar uma única foto demorava vários segundos — o que tornava impossível usar esses modelos em <strong>vídeos ao vivo</strong> ou câmeras de segurança.</p>
+<p>Em 2016, surgiu o <strong>YOLO</strong>, sigla para <strong><em>You Only Look Once</em></strong> (em português, <strong>"Você Só Olha Uma Vez"</strong>).</p>
+<pre class="highlight"><code class="language-text">Abordagem Antiga (Duas Etapas - Lenta):
+Foto ──► Recorta milhares de pedaços ──► Analisa um por um ──► Resultado (Demorado 🐢)
+
+Abordagem do YOLO (Olhar Único - Tempo Real):
+Foto ──► Olha a imagem inteira de uma só vez ──► Resultado Instantâneo (Tempo Real ⚡)</code></pre>
+<p>O grande diferencial do YOLO é que ele analisa a <strong>imagem inteira de uma única vez</strong>, conseguindo processar dezenas de quadros por segundo mesmo em computadores comuns ou celulares.</p>
+<hr />
+<h4 id="como-o-yolo-funciona-por-dentro-passo-a-passo">🔍 Como o YOLO funciona por dentro? (Passo a Passo)</h4>
+<p>Quando entregamos uma imagem para o YOLO, ele executa <strong>4 passos simples e organizados</strong> para encontrar todos os objetos:</p>
+<p><img src="../assets/images/yolo_passo_a_passo.gif" alt="Animação passo a passo mostrando como o YOLO funciona por dentro: 1. Padronização (Letterbox), 2. Divisão em Grade (Grid), 3. Palpites Simultâneos e 4. Faxina Final (NMS)"></p>
+<h5 id="passo-1-padronizacao-da-imagem-letterbox">Passo 1: Padronização da Imagem (<em>Letterbox</em>)</h5>
+<p>A rede neural do YOLO espera receber imagens sempre de mesmo tamanho (por exemplo, um quadrado de <span class="arithmatex">\(640 \times 640\text{ pixels}\)</span>). Mas se você enviar uma foto retangular de celular e simplesmente "espremê-la" para virar um quadrado, uma pessoa parecerá achatada ou esticada, confundindo o modelo.
+Por isso, o YOLO usa uma técnica chamada <strong>Letterbox</strong>: ele diminui a foto mantendo o formato original dos objetos e preenche o espaço que sobrar nas bordas com faixas cinzas (igual às faixas pretas de um filme na TV).</p>
+<h5 id="passo-2-divisao-em-grade-grid">Passo 2: Divisão em Grade (<em>Grid</em>)</h5>
+<p>Imagine que o YOLO desenha uma <strong>grade invisível</strong> (<span class="arithmatex">\(S \times S\)</span>) sobre a imagem, dividindo a foto em vários quadradinhos (como um tabuleiro de xadrez).</p>
+<pre class="highlight"><code class="language-text">+-------+-------+-------+
+|       |       |       |   • A imagem é dividida em células (quadradinhos).
++-------+-------+-------+   • O quadradinho onde cai o CENTRO do objeto (●)
+|       |   ●   |       |     fica responsável por dizer:
++-------+-------+-------+     "Aqui tem uma pessoa, e a caixa dela tem este tamanho!"
+|       |       |       |
++-------+-------+-------+</code></pre>
+<blockquote>
+<p><strong>Detalhe esperto:</strong> Para não deixar passar nada, o YOLO cria <strong>3 grades de tamanhos diferentes</strong> ao mesmo tempo: uma grade bem miúda para achar <strong>objetos pequenos</strong> (como um celular ou pássaro longe), uma média para <strong>objetos médios</strong> (uma pessoa) e uma grade grande para <strong>objetos gigantes</strong> (um ônibus inteiro na frente da câmera).</p>
+</blockquote>
+<h5 id="passo-3-palpites-simultaneos-em-cada-quadradinho">Passo 3: Palpites Simultâneos em Cada Quadradinho</h5>
+<p>Todos os quadradinhos da grade trabalham juntos e ao mesmo tempo. Cada quadradinho onde cai o centro de um objeto entrega um "pacote de informações" contendo:</p>
+<ol>
+<li><strong>Onde está a caixa (<em>Bounding Box</em>):</strong> As coordenadas <span class="arithmatex">\((x_1, y_1)\)</span> e <span class="arithmatex">\((x_2, y_2)\)</span> de onde a caixa começa e onde termina (ou centro <span class="arithmatex">\((x, y)\)</span> com largura <span class="arithmatex">\(w\)</span> e altura <span class="arithmatex">\(h\)</span>).</li>
+<li><strong>O que é o objeto (<em>Classe</em>):</strong> Se é uma <code>pessoa</code>, um <code>carro</code>, um <code>cachorro</code>, uma <code>mochila</code>, etc.</li>
+<li><strong>Qual a certeza (<em>Confiança</em>):</strong> Uma nota <span class="arithmatex">\(c \in [0, 1]\)</span> (de <span class="arithmatex">\(0\%\)</span> a <span class="arithmatex">\(100\%\)</span>) indicando o quão seguro o modelo está daquele palpite.</li>
+</ol>
+<h5 id="passo-4-a-faxina-final-filtro-de-confianca-nms">Passo 4: A Faxina Final (Filtro de Confiança + NMS)</h5>
+<p>Como a grade tem milhares de quadradinhos dando palpites ao mesmo tempo, dois problemas acontecem: muitos quadradinhos dão palpites fracos onde não há nada, e quadradinhos vizinhos acabam desenhando <strong>várias caixas repetidas sobre a mesma pessoa</strong>.</p>
+<p>Para entregar um resultado limpo, o YOLO faz uma faxina automática em duas etapas:</p>
+<ol>
+<li><strong>Filtro de Confiança (<em>Confidence</em>):</strong> Definimos uma nota de corte (por exemplo, <span class="arithmatex">\(40\%\)</span> ou <span class="arithmatex">\(0{,}40\)</span>). Qualquer palpite com certeza menor que <span class="arithmatex">\(40\%\)</span> é descartado na hora.</li>
+<li><strong>Eliminação de Caixas Repetidas (<em>NMS — Non-Maximum Suppression</em>):</strong> Quando duas ou mais caixas estão sobrepostas em cima do mesmo objeto (medido pela métrica <span class="arithmatex">\(\text{IoU} = \frac{\text{Área de Interseção}}{\text{Área de União}}\)</span>), o YOLO compara a nota de certeza delas, <strong>mantém apenas a melhor caixa</strong> e apaga todas as outras repetidas!</li>
+</ol>
+<pre class="highlight"><code class="language-text">Antes da limpeza (NMS):            Depois da limpeza (NMS):
+┌─────────────┐                    ┌─────────────┐
+│ ┌───────────┼─┐                  │             │
+│ │ Pessoa 92%│ │  ──────────────► │ Pessoa 92%  │
+└─┼───────────┘ │                  │             │
+  └─────────────┘                  └─────────────┘
+(Caixas repetidas: 92%, 85%, 78%)  (Fica apenas a melhor!)</code></pre>
+<hr />
+<h4 id="o-que-o-yolo-ja-sabe-de-fabrica-base-coco-e-tamanhos">📦 O que o YOLO já sabe de fábrica? (Base COCO e Tamanhos)</h4>
+<p>Você não precisa treinar o YOLO do zero para começar a usar! Os modelos oficiais (como o <strong>YOLOv8</strong> e o <strong>YOLO11</strong>, da biblioteca <code>ultralytics</code>) já vêm pré-treinados em um famoso banco de imagens chamado <strong>COCO</strong>, o que significa que eles já reconhecem <strong>80 tipos de objetos do dia a dia</strong> instantaneamente:</p>
+<ul>
+<li><strong>Pessoas e Acessórios:</strong> <code>person</code> (pessoa), <code>backpack</code> (mochila), <code>umbrella</code> (guarda-chuva), <code>handbag</code> (bolsa), <code>tie</code> (gravata)...</li>
+<li><strong>Trânsito e Rua:</strong> <code>car</code> (carro), <code>bus</code> (ônibus), <code>motorcycle</code> (moto), <code>bicycle</code> (bicicleta), <code>truck</code> (caminhão), <code>traffic light</code> (semáforo)...</li>
+<li><strong>Animais:</strong> <code>dog</code> (cachorro), <code>cat</code> (gato), <code>bird</code> (pássaro), <code>horse</code> (cavalo)...</li>
+<li><strong>Objetos Domésticos e Eletrônicos:</strong> <code>cell phone</code> (celular), <code>laptop</code> (notebook), <code>bottle</code> (garrafa), <code>cup</code> (copo), <code>chair</code> (cadeira), <code>couch</code> (sofá), <code>tv</code> (televisão)...</li>
+</ul>
+<p>Além disso, o YOLO é disponibilizado em <strong>5 tamanhos diferentes</strong> (indicados pela última letra do nome do arquivo, como <code>yolov8n.pt</code>):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Sufixo</th>
+<th style="text-align: left;">Tamanho</th>
+<th style="text-align: left;">Velocidade</th>
+<th style="text-align: left;">Precisão</th>
+<th style="text-align: left;">Quando usar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong><code>n</code></strong> (<em>Nano</em>)</td>
+<td style="text-align: left;">Super leve</td>
+<td style="text-align: left;">⚡⚡⚡⚡⚡</td>
+<td style="text-align: left;">⭐⭐⭐</td>
+<td style="text-align: left;">Ideal para aulas, notebooks comuns, celulares e testes rápidos (<code>yolov8n.pt</code>).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>s</code></strong> (<em>Small</em>)</td>
+<td style="text-align: left;">Pequeno</td>
+<td style="text-align: left;">⚡⚡⚡⚡</td>
+<td style="text-align: left;">⭐⭐⭐⭐</td>
+<td style="text-align: left;">Bom equilíbrio entre velocidade e precisão em vídeos ao vivo.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>m</code></strong> (<em>Medium</em>)</td>
+<td style="text-align: left;">Médio</td>
+<td style="text-align: left;">⚡⚡⚡</td>
+<td style="text-align: left;">⭐⭐⭐⭐</td>
+<td style="text-align: left;">Uso geral quando se tem uma placa de vídeo (GPU) básica.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>l</code></strong> (<em>Large</em>)</td>
+<td style="text-align: left;">Grande</td>
+<td style="text-align: left;">⚡⚡</td>
+<td style="text-align: left;">⭐⭐⭐⭐⭐</td>
+<td style="text-align: left;">Cenários com objetos difíceis ou muito pequenos.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><code>x</code></strong> (<em>Extra Large</em>)</td>
+<td style="text-align: left;">Pesado</td>
+<td style="text-align: left;">⚡</td>
+<td style="text-align: left;">⭐⭐⭐⭐⭐</td>
+<td style="text-align: left;">Quando a precisão máxima é mais importante que a velocidade.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="4-como-ensinar-novos-objetos-ao-yolo-datasets-anotacao-e-fine-tuning">🏷️ 4. Como ensinar novos objetos ao YOLO? (Datasets, Anotação e Fine-Tuning)</h3>
+<hr />
+<p>O modelo padrão do YOLO já reconhece <span class="arithmatex">\(80\)</span> objetos do cotidiano, mas e se você quiser criar um projeto para detectar <strong>capacetes de segurança (EPIs)</strong> em uma obra, <strong>pragas agrícolas</strong> em uma plantação, <strong>placas de trânsito brasileiras</strong> ou <strong>defeitos em peças industriais</strong>?</p>
+<p>Para isso, não precisamos criar nem treinar uma rede neural do zero (o que exigiria milhões de fotos e semanas de supercomputadores). Nós usamos uma técnica chamada <strong><em>Fine-Tuning</em></strong> (<strong>Ajuste Fino</strong> ou <em>Transfer Learning</em>): pegamos um YOLO que já sabe "enxergar" bordas, formas e texturas muito bem e apenas <strong>especializamos as últimas camadas dele</strong> com exemplos dos nossos próprios objetos!</p>
+<p>Esse processo funciona em <strong>3 etapas práticas</strong>:</p>
+<h4 id="passo-1-onde-conseguir-as-imagens-datasets-prontos-vs-proprias-fotos">Passo 1: Onde conseguir as imagens? (Datasets Prontos vs. Próprias Fotos)</h4>
+<p>Antes de sair tirando fotos e desenhando caixas manualmente, vale uma regra de ouro: <strong>verifique se alguém já montou esse banco de imagens (<em>dataset</em>) antes!</strong></p>
+<ul>
+<li><strong>Usando Datasets Prontos (Caminho Rápido):</strong> Plataformas gratuitas da comunidade reúnem milhares de datasets já fotografados e anotados no formato exato do YOLO, prontos para baixar e treinar:<ul>
+<li><a href="https://www.kaggle.com/datasets"><strong>Kaggle</strong></a>: A maior comunidade de Ciência de Dados do mundo. Basta pesquisar, por exemplo, <em>"helmet detection yolo"</em> ou <em>"pothole detection"</em> (buracos na pista) para encontrar bases completas.</li>
+<li><a href="https://universe.roboflow.com/"><strong>Roboflow Universe</strong></a>: O maior repositório público focado exclusivamente em Visão Computacional, com centenas de milhares de datasets que já podem ser exportados diretamente para <code>YOLOv8</code> / <code>YOLO11</code>.</li>
+</ul>
+</li>
+<li><strong>Criando seu Próprio Dataset:</strong> Se o seu problema for muito específico (como um produto exclusivo da sua fábrica ou empresa), basta coletar entre <strong><span class="arithmatex">\(100\)</span> e <span class="arithmatex">\(500\)</span> fotos variadas</strong> por classe — mudando ângulos, iluminação e cenários para o modelo não "decorar" apenas um fundo.</li>
+</ul>
+<h4 id="passo-2-anotacao-de-dados-data-labeling">Passo 2: Anotação de Dados (<em>Data Labeling</em>)</h4>
+<p>Se você tirou suas próprias fotos, precisa mostrar ao YOLO onde está o objeto em cada imagem. Esse trabalho de desenhar as caixas delimitadoras (<em>Bounding Boxes</em>) ou contornos e dar nome a cada classe é chamado de <strong>Anotação de Dados</strong> (ou <em>Rotulagem</em>).</p>
+<p>Hoje existem ferramentas gratuitas e visuais que tornam isso muito rápido (algumas até usam IA para pré-desenhar as caixas automaticamente para você):</p>
+<ul>
+<li><strong>Roboflow Annotate:</strong> Funciona direto no navegador, organiza a divisão de treino/validação e exporta a pasta pronta para o Google Colab.</li>
+<li><strong>CVAT (<em>Computer Vision Annotation Tool</em>) e Label Studio:</strong> Ferramentas profissionais de código aberto excelentes para anotar imagens e vídeos em equipe.</li>
+<li><strong>LabelImg / MakeSense.ai:</strong> Opções leves e gratuitas para marcar caixas rapidamente sem precisar instalar programas pesados.</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">O que a ferramenta de anotação gera?</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Para cada foto (ex.: <code>obra_01.jpg</code>), a ferramenta cria um arquivo de texto com o mesmo nome (<code>obra_01.txt</code>). Cada linha desse arquivo representa um objeto marcado na foto, com os valores padronizados entre <span class="arithmatex">\(0\)</span> e <span class="arithmatex">\(1\)</span>:</p>
+<pre class="highlight"><code class="language-text"># Formato YOLO: &lt;id_da_classe&gt; &lt;x_centro&gt; &lt;y_centro&gt; &lt;largura&gt; &lt;altura&gt;
+0 0.512 0.384 0.140 0.210
+1 0.498 0.215 0.085 0.092</code></pre>
+<p>Além disso, um arquivo chamado <strong><code>data.yaml</code></strong> funciona como o "mapa" do dataset, informando ao YOLO onde estão as pastas de treino e quais são os nomes das classes:</p>
+<pre class="highlight"><code class="language-yaml">train: ../train/images
+val: ../valid/images
+
+nc: 2 # Número de classes
+names: ['trabalhador', 'capacete']</code></pre>
+</div>
+</div>
+</div>
+<h4 id="passo-3-o-fine-tuning-na-pratica-apenas-3-linhas-de-codigo">Passo 3: O Fine-Tuning na Prática (Apenas 3 linhas de código!)</h4>
+<p>Com o dataset organizado e o arquivo <code>data.yaml</code> em mãos, a biblioteca <code>ultralytics</code> faz todo o trabalho pesado de ajuste fino com pouquíssimas linhas em Python (recomendado rodar com <strong>GPU T4 gratuita</strong> ativada no Google Colab):</p>
+<pre class="highlight"><code class="language-python">from ultralytics import YOLO
+
+# 1. Carregamos o modelo base pré-treinado (que já sabe enxergar formas gerais)
+modelo = YOLO("yolov8n.pt")
+
+# 2. Fazemos o Fine-Tuning (ajuste fino) com o nosso próprio dataset!
+# epochs = quantas vezes o modelo vai estudar o conjunto de fotos (ex: 50 ciclos)
+modelo.train(data="caminho/para/data.yaml", epochs=50, imgsz=640)</code></pre>
+<p>Ao final do treinamento, o YOLO salva automaticamente o seu novo modelo personalizado dentro da pasta <code>runs/detect/train/weights/best.pt</code>. A partir daí, basta carregá-lo normalmente com <code>YOLO("best.pt")</code> e usá-lo em fotos, vídeos ou câmeras ao vivo!</p>
+<hr />
+<h3 id="5-pratica-identificando-objetos-em-imagens-e-videos-com-yolo">💻 5. Prática: Identificando Objetos em Imagens e Vídeos com YOLO</h3>
+<hr />
+<p>Chegou a hora de colocar a mão na massa! No nosso notebook prático no <strong>Google Colab</strong>, vamos utilizar a biblioteca <strong>Ultralytics YOLO</strong> junto com o <strong>OpenCV</strong> para desenvolver as seguintes etapas:</p>
+<ol>
+<li><strong>Configuração e Carregamento do Modelo:</strong> instalação do pacote <code>ultralytics</code> e inspeção das <span class="arithmatex">\(80\)</span> classes pré-treinadas do modelo <code>yolov8n.pt</code>.</li>
+<li><strong>Detecção de Objetos em Imagens:</strong> inferência com filtro de confiança (<code>conf=0.40</code>), plotagem das caixas delimitadoras (<em>Bounding Boxes</em>) e leitura das coordenadas <span class="arithmatex">\((x_1, y_1, x_2, y_2)\)</span>.</li>
+<li><strong>Extração Estruturada (Ponte para o Dia 03):</strong> criação das funções <code>detectar_objetos()</code> e <code>contar_objetos()</code> que organizam as saídas do modelo em listas de dicionários prontas para tomada de decisão.</li>
+<li><strong>Segmentação de Instâncias e Estimativa de Pose:</strong> execução comparativa dos modelos <code>yolov8n-seg.pt</code> (máscaras de contorno exato) e <code>yolov8n-pose.pt</code> (articulações do esqueleto humano).</li>
+<li><strong>Processamento de Vídeos (<em>Frame a Frame</em>):</strong> leitura de vídeos com <code>cv2.VideoCapture</code>, detecção quadro a quadro e exportação do vídeo anotado com <code>cv2.VideoWriter</code>.</li>
+</ol>
+<p style="text-align: center; margin-top: 24px;">
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://drive.google.com/file/d/1U-hymZNRsirs_-WRP_84XopVnCX-MxXD/view?usp=sharing" target="_blank">Clique aqui para abrir o projeto no Colab</a>
+</p>
+
+<hr />
+<h3 id="para-ir-mais-a-fundo">💭 Para ir mais a fundo...</h3>
+<hr />
+<h4 id="ferramentas-visuais-e-links-uteis">📚 Ferramentas visuais e links úteis</h4>
+<ul>
+<li><a href="https://heltonmaia.com/computervision/intro.html" target="_blank">Prof. Helton Maia — Material de Visão Computacional</a></li>
+<li><a href="https://heltonmaia.com/playground/imagem.html?aba=equalizacao" target="_blank">Prof. Helton Maia — Playground Interativo de Processamento de Imagens</a></li>
+<li><a href="https://poloclub.github.io/cnn-explainer/" target="_blank">CNN Explainer — Veja uma Rede Neural Convolucional funcionando por dentro de forma visual e interativa no navegador</a></li>
+<li><a href="https://playground.tensorflow.org/" target="_blank">TensorFlow Playground — Simulador interativo para brincar com redes neurais sem precisar programar</a></li>
+<li><a href="https://docs.ultralytics.com/pt/" target="_blank">Documentação Oficial da Ultralytics YOLO (em Português)</a></li>
+</ul>
+<h4 id="prompts-para-estudar-com-inteligencia-artificial">🤖 Prompts para estudar com Inteligência Artificial</h4>
+<p>Quer tirar dúvidas ou explorar novos projetos? Copie e cole os prompts abaixo no ChatGPT, Claude ou Gemini:</p>
+<ol>
+<li>
+<p><strong>Entendendo redes neurais e filtros com analogias do dia a dia:</strong></p>
+<blockquote>
+<p><em>"Estou começando a aprender Visão Computacional. Explique, usando analogias simples do cotidiano e sem fórmulas matemáticas, qual é a diferença entre usar um filtro manual de imagem (como no Photoshop ou OpenCV) e usar uma Rede Neural Convolucional (CNN) para reconhecer objetos."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Revisando como o YOLO pensa:</strong></p>
+<blockquote>
+<p><em>"Explique passo a passo para um iniciante como o modelo YOLO consegue detectar vários objetos em uma imagem de uma só vez. Use exemplos simples para explicar o que é a divisão em grade (grid), o filtro de confiança (confidence) e por que ele precisa remover caixas repetidas (NMS) no final."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Treinando o YOLO para reconhecer novos objetos (Personalização):</strong></p>
+<blockquote>
+<p><em>"Já sei usar o YOLO pré-treinado em Python para detectar pessoas e carros. Agora quero ensinar o YOLO a reconhecer um objeto específico do meu projeto (por exemplo, capacetes de segurança ou placas de trânsito). Explique de forma simples e passo a passo como funciona esse processo: quantas fotos preciso tirar, como marcar os objetos nas fotos usando ferramentas gratuitas e como rodar o treinamento no Google Colab."</em></p>
+</blockquote>
+</li>
+</ol></p>
+    </article>
+
+    
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../dia01/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../dia03/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+    <small class="d-block mb-3">Desenvolvido por Marcos Aurélio Tavares Filho.</small>
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+
+</body>
+
+</html>

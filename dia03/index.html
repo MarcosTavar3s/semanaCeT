@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <title>Agentes + Visão Computacional - BootCamp - Visão Computacional + IA na prática
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://marcostavar3s.github.io/semanaC-T/dia03/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon.ico">
+    
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    
+    <link href="../assets/stylesheets/extra.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">BootCamp - Visão Computacional + IA na prática</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Início]</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class=" active 
+                            nav-link dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">[Material]</a>
+                            <ul class="dropdown-menu">
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia01/" class="dropdown-item text-decoration-none ">Fundamentos de imagens digitais</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="../dia02/" class="dropdown-item text-decoration-none ">Modelos de Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                                    <!-- block dropdown-menu -->
+    <li>
+        <a href="./" class="dropdown-item text-decoration-none  active ">Agentes + Visão Computacional</a>
+    </li>
+<!-- endblock -->
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../contatos/">[Contatos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main>
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Agentes + Visão Computacional</h1>
+            
+        </header>
+        
+        
+        
+        <p><h1 id="agentes-visao-computacional">Agentes + Visão Computacional</h1>
+<hr />
+<h3 id="ferramentas-utilizadas">🛠️ Ferramentas Utilizadas</h3>
+<hr />
+<div style="inline-flex">
+<a href="https://colab.new" target="_blank"><img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" alt="Google Colab"></a>
+<img src="https://img.shields.io/badge/Ultralytics%20YOLO-111F68?style=for-the-badge&logo=yolo&logoColor=white" alt="Ultralytics YOLO">
+<img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white" alt="OpenCV">
+<img src="https://img.shields.io/badge/MCP-000000?style=for-the-badge&logo=anthropic&logoColor=white" alt="Model Context Protocol">
+<img src="https://img.shields.io/badge/Telegram%20Bot%20API-26A5E4?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram Bot API">
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+</div>
+
+<hr />
+<h3 id="1-o-que-e-um-agente-de-ia">🤖 1. O que é um Agente de IA?</h3>
+<hr />
+<p>Nos <strong>Dias 01 e 02</strong>, aprendemos a manipular pixels e a utilizar modelos como o <strong>YOLO</strong> para detectar objetos em imagens e vídeos. Porém, um detector convencional apenas retorna dados brutos (caixas, classes e probabilidades). Como transformar essas detecções em <strong>tomada de decisão e ação no mundo real</strong>?</p>
+<p>É aqui que entra o conceito de <strong>Agente de IA</strong>: um sistema que <strong>observa</strong> um ambiente, <strong>processa</strong> informações e <strong>escolhe ações</strong> para alcançar um objetivo específico.</p>
+<p><img src="../assets/images/ciclo_agente_visao.gif" alt="Animação mostrando o ciclo de funcionamento de um Agente de Visão: 1. Observação, 2. Interpretação, 3. Decisão, 4. Ação e 5. Resultado com feedback contínuo"></p>
+<ul>
+<li><strong>Combinação de técnicas:</strong> Um agente pode combinar modelos de aprendizado de máquina (como redes neurais), regras de negócio e funções Python. <strong>Nem todo agente precisa usar um Modelo de Linguagem (LLM)</strong> — agentes baseados em regras ou políticas determinísticas são rápidos, previsíveis e amplamente usados na indústria.</li>
+<li><strong>Agente de Visão (<em>Vision Agent</em>):</strong> Utiliza imagens ou vídeos como <strong>observações</strong> do ambiente. Enquanto um detector comum apenas lista os objetos identificados, o agente de visão usa essas detecções para escolher verificações adicionais, acionar ferramentas externas e decidir o próximo passo.</li>
+</ul>
+<h4 id="recursos-disponiveis-em-um-agente-tools-skills-e-contexto">Recursos Disponíveis em um Agente: <em>Tools</em>, <em>Skills</em> e Contexto</h4>
+<p>Para que um agente consiga ir além de apenas processar dados e passe a resolver problemas reais, ele se apoia em três pilares principais de recursos:</p>
+<p><img src="../assets/images/recursos_agentes_tools_skills.png" alt="Diagrama dos recursos de um Agente de IA comparando Tools (ferramentas atômicas que o agente executa), Skills (habilidades e fluxos de trabalho que o agente sabe fazer) e a base de Contexto, Memória e Regras"></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Tools (Ferramentas — O que o agente EXECUTA)</label><label for="__tabbed_1_2">Skills (Habilidades — Como o agente SABE FAZER)</label><label for="__tabbed_1_3">Contexto, Memória e Regras (Base de Suporte)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> São funções atômicas, APIs externas ou integrações que permitem ao agente interagir diretamente com o mundo externo (ler sensores, rodar um modelo, consultar um banco de dados ou enviar uma mensagem).</li>
+<li><strong>No nosso projeto:</strong> Funções como <code>detectar_objetos()</code>, <code>contar_objetos()</code>, <code>verificar_condicao()</code> e <code>enviar_alerta()</code> expostas via Python/MCP.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> São fluxos de trabalho estruturados, instruções passo a passo e boas práticas reutilizáveis que ensinam o agente a combinar múltiplas <em>Tools</em> para cumprir uma tarefa complexa.</li>
+<li><strong>No nosso projeto:</strong> A rotina completa de monitoramento de câmera — que coordena a comparação antes/depois, aplica confirmação temporal (<em>debounce</em>) e decide quando notificar a equipe.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> Reúne os <em>prompts</em> do sistema, o histórico de observações anteriores (como a contagem de objetos no quadro passado) e as regras de negócio que guiam as decisões do agente.</li>
+</ul>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="2-bot-vs-agente-e-niveis-de-autonomia">⚖️ 2. Bot vs. Agente e Níveis de Autonomia</h3>
+<hr />
+<h4 id="bot-e-agente-qual-e-a-diferenca">Bot e Agente: qual é a diferença?</h4>
+<p>Um <strong>bot</strong> automatiza interações ou tarefas repetitivas seguindo um roteiro fixo (<em>gatilho → regra → resposta</em>). Já um <strong>agente</strong> persegue um objetivo: ele planeja passos, usa ferramentas, observa o resultado e ajusta a rota quando necessário.</p>
+<blockquote>
+<p><strong>Importante:</strong> Os conceitos não são excludentes! Um <strong>bot</strong> (como um bot do Telegram) pode fazer parte de um sistema <strong>agente</strong>, atuando como o canal de comunicação ou ferramenta de notificação do agente.</p>
+</blockquote>
+<p><img src="../assets/images/bot_vs_agente_recife.png" alt="Comparativo visual entre Bot e Agente de IA"></p>
+<h4 id="niveis-de-autonomia-de-agentes-de-ia">Níveis de Autonomia de Agentes de IA</h4>
+<p>Dependendo de quanto controle o humano mantém sobre o sistema e de como o agente planeja suas ações, classificamos os agentes em <strong>5 níveis de autonomia</strong> — divididos entre aqueles em que o <strong>usuário é ativo no fluxo (L1 a L3)</strong> e aqueles em que o <strong>usuário é passivo (L4 e L5)</strong>, apenas aprovando bloqueios ou monitorando o sistema:</p>
+<p><img src="../assets/images/niveis_autonomia_agentes_ia.png" alt="Níveis de autonomia de agentes de IA"></p>
+<p style="text-align: center;"> Artigo original: <a href="https://arxiv.org/html/2506.12469v1" target="_blank">Levels of Autonomy for AI Agents Working Paper.</a></p>
+
+<blockquote>
+<p><strong>No nosso projeto prático:</strong> Construiremos um agente que opera com <strong>política determinística em código</strong> (onde definimos os critérios de decisão e o agente executa o monitoramento de forma autônoma) e veremos como ele pode ser expandido com um <strong>LLM</strong> para planejar passos de forma mais flexível.</p>
+</blockquote>
+<hr />
+<h3 id="3-model-context-protocol-mcp">🔌 3. Model Context Protocol (MCP)</h3>
+<hr />
+<p>Quando construímos agentes que precisam acionar diversas funções (consultar bancos de dados, verificar sensores, analisar imagens ou enviar mensagens), integrar cada ferramenta manualmente pode se tornar confuso.</p>
+<p>O <strong>Model Context Protocol (MCP)</strong> é um protocolo aberto que padroniza a forma como aplicações de IA descobrem e utilizam ferramentas (<em>tools</em>) e recursos disponibilizados por servidores compatíveis.</p>
+<p><img src="../assets/images/arquitetura_mcp_visao.png" alt="Diagrama da Arquitetura Model Context Protocol (MCP) no Agente de Visão conectando o Host (Google Colab) ao Servidor MCP (FastMCP) com as ferramentas detectar_objetos, contar_objetos, verificar_condicao e enviar_alerta"></p>
+<h4 id="componentes-da-arquitetura-mcp">Componentes da Arquitetura MCP:</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Host (Anfitrião)</label><label for="__tabbed_2_2">Cliente MCP</label><label for="__tabbed_2_3">Servidor MCP</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> É a aplicação principal que integra o modelo ou a política do agente e coordena toda a interação (por exemplo, o nosso notebook no Google Colab ou uma aplicação em produção).</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> Componente dentro do Host que mantém a conexão com o servidor MCP, consulta quais ferramentas estão disponíveis e solicita a execução de operações.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>Papel:</strong> Expõe ferramentas padronizadas (como funções Python decoradas com <code>@mcp.tool()</code>) para que o cliente possa chamá-las de forma segura e estruturada.</li>
+</ul>
+</div>
+</div>
+</div>
+<blockquote>
+<p><strong>Atenção:</strong> O MCP <strong>não é um modelo de IA</strong> e não escolhe sozinho quais ferramentas usar. A decisão sempre cabe ao <strong>agente</strong> (seja via regras em código ou via LLM). No Google Colab, cliente e servidor podem ser testados na mesma sessão utilizando o <code>FastMCP</code>.</p>
+</blockquote>
+<hr />
+<h3 id="4-pratica-vision-agent-para-detectar-mudancas-entre-imagens">💻 4. Prática: Vision Agent para Detectar Mudanças entre Imagens</h3>
+<hr />
+<p>Nesta prática final, vamos integrar tudo o que construímos no minicurso para criar no <strong>Google Colab</strong> um <strong>Vision Agent completo</strong>, capaz de inspecionar imagens com <strong>YOLO + OpenCV</strong>, tomar decisões com base nas detecções, acionar ferramentas via <strong>MCP</strong> e enviar alertas automáticos no <strong>Telegram</strong>!</p>
+<p><img src="../assets/images/fluxo_pratico_vision_agent.png" alt="Fluxo prático do projeto Vision Agent comparando a cena antes e depois com YOLO, acionando verificar_condicao() e disparando alerta no Telegram"></p>
+<h4 id="ferramentas-do-agente-fastmcp">Ferramentas do Agente (<code>FastMCP</code>)</h4>
+<ul>
+<li><code>detectar_objetos(caminho_imagem, confianca)</code>: executa o YOLO e retorna classes, confiança e coordenadas <span class="arithmatex">\((x_1, y_1, x_2, y_2)\)</span>.</li>
+<li><code>contar_objetos(deteccoes, classe)</code>: contabiliza as detecções de uma classe específica na cena.</li>
+<li><code>verificar_condicao(observacao)</code>: calcula a variação na contagem (<span class="arithmatex">\(\Delta C = C_{\text{depois}} - C_{\text{antes}}\)</span>) e avalia se houve mudança relevante na classe monitorada.</li>
+<li><code>enviar_alerta(mensagem, token_bot, chat_id, caminho_foto)</code>: envia mensagem de texto e/ou foto anotada pelo YOLO via <strong>Telegram Bot API</strong>.</li>
+</ul>
+<h4 id="como-o-agente-escolhe-o-que-investigar">Como o agente escolhe o que investigar?</h4>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Versão Básica (Regras Determinísticas)</label><label for="__tabbed_3_2">Versão com LLM (Planejador Autônomo)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>A versão padrão do nosso projeto utiliza <strong>regras determinísticas em Python</strong>:</p>
+<ol>
+<li>O agente observa a cena comparando duas imagens (<em>antes</em> e <em>depois</em>) com <code>detectar_objetos()</code> e <code>contar_objetos()</code>.</li>
+<li>Se houver presença ou variação na contagem da classe monitorada (<span class="arithmatex">\(\Delta C \neq 0\)</span>, ex.: <code>person</code>), a política do agente aciona <code>verificar_condicao(observacao)</code>.</li>
+<li>Caso a verificação confirme uma mudança relevante (<span class="arithmatex">\(C_{\text{depois}} &gt; 0\)</span>), a regra de ação dispara <code>enviar_alerta()</code> para notificar o usuário no Telegram (com texto e imagem anotada).</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>Um <strong>Modelo de Linguagem (LLM)</strong> pode substituir ou complementar esse planejador determinístico:</p>
+<ul>
+<li>Em vez de <code>if/else</code> fixos, o LLM lê a lista de ferramentas do Servidor MCP (a partir das <em>docstrings</em> e tipos do Python) e escolhe quais chamar com base no objetivo em linguagem natural.</li>
+<li>Como essa opção exige acesso a um provedor de modelo e uma chave de API (<code>API Key</code>), ela é opcional e não é necessária para executar a versão básica do minicurso.</li>
+</ul>
+</div>
+</div>
+</div>
+<blockquote>
+<p><strong>💡 Dica para o mundo real (Evitando Flood de Alertas em Vídeos):</strong>
+Se você conectar esse agente a uma câmera ao vivo (usando o loop de vídeo do <strong>Dia 02</strong>), uma pessoa caminhando na cena aparecerá em <span class="arithmatex">\(30\text{ quadros/s}\)</span> — o que dispararia <span class="arithmatex">\(30\)</span> mensagens seguidas no Telegram! Em sistemas reais, adicionamos 
+duas regras simples na política do agente:</p>
+<ol>
+<li><strong>Confirmação Temporal (<em>Debounce</em>):</strong> Só confirmar a mudança se a nova contagem se mantiver por pelo menos <span class="arithmatex">\(N\)</span> quadros consecutivos (evita falsos positivos de um único frame borrado).</li>
+<li><strong>Tempo de Resfriamento (<em>Cooldown</em>):</strong> Guardar o horário do último envio (<code>time.time()</code>) e aguardar um intervalo mínimo (<span class="arithmatex">\(\Delta t \ge 60\text{ s}\)</span>) antes de enviar um novo alerta da mesma classe.</li>
+</ol>
+</blockquote>
+<p style="text-align: center; margin-top: 24px;">
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://www.kaggle.com/code/marcostavar3s/pratica-dia03" target="_blank">Clique aqui para abrir o projeto no Kaggle</a>
+</p>
+
+<hr />
+<h3 id="5-reflexao-o-experimento-da-sala-chinesa-a-ia-tem-consciencia">🧠 5. Reflexão: O Experimento da Sala Chinesa — A IA tem consciência?</h3>
+<hr />
+<p>Ao longo deste minicurso, evoluímos de simples matrizes de pixels (<strong>Dia 01</strong>) para redes neurais capazes de reconhecer dezenas de objetos em tempo real (<strong>Dia 02</strong>) e, finalmente, construímos um <strong>Agente de Visão</strong> que observa uma cena, interpreta mudanças, toma decisões e envia alertas (<strong>Dia 03</strong>). Diante de sistemas tão autônomos — especialmente quando combinados a grandes Modelos de Linguagem (LLMs) — surge uma pergunta inevitável:</p>
+<blockquote>
+<p><strong>Quando uma IA "enxerga" uma pessoa na imagem ou "decide" agir, ela realmente compreende o que está fazendo? A IA possui consciência?</strong></p>
+</blockquote>
+<p>Para responder a essa questão, o filósofo <strong>John Searle</strong> propôs em 1980 um dos exercícios mentais mais famosos da ciência da computação e da filosofia da mente: <strong>O Argumento da Sala Chinesa</strong> (<em>Chinese Room</em>).</p>
+<p><img src="../assets/images/sala_chinesa_searle.png" alt="Infográfico do Experimento da Sala Chinesa de John Searle mostrando a entrada e saída de símbolos em chinês do lado de fora, a manipulação puramente sintática de símbolos pelo manual de regras dentro da sala fechada, e a conclusão de Searle de que manipular símbolos não é compreender significado"></p>
+<h4 id="como-funciona-o-exercicio-mental">📦 Como funciona o exercício mental?</h4>
+<p>Imagine a seguinte situação passo a passo:</p>
+<ol>
+<li>Uma pessoa que <strong>não sabe absolutamente nada de chinês</strong> (fala apenas português) está trancada sozinha dentro de uma sala fechada.</li>
+<li>Dentro da sala, existem caixas cheias de ideogramas chineses e um <strong>manual gigantesco de regras em português</strong>. O manual não traduz nenhuma palavra; ele apenas dá instruções visuais sobre os formatos dos símbolos, como:<blockquote>
+<p><em>"Se você receber uma folha com o símbolo <code>你好</code>, procure na caixa 3 e devolva uma folha com os símbolos <code>您好</code>."</em></p>
+</blockquote>
+</li>
+<li>Do lado de fora da sala, um <strong>falante nativo de chinês</strong> passa perguntas escritas em chinês por baixo da porta (<em>Entrada / Input</em>).</li>
+<li>A pessoa trancada olha o desenho dos símbolos recebidos, segue rigorosamente as instruções do manual (<em>Processamento</em>) e devolve a resposta em chinês por baixo da porta (<em>Saída / Output</em>).</li>
+</ol>
+<p>Para quem está do lado de fora, a conversa flui tão bem que parece haver alguém fluente em chinês dentro da sala. Porém, <strong>John Searle</strong> faz a pergunta decisiva: <strong>a pessoa lá dentro (ou a sala como um todo) aprendeu ou entende chinês?</strong></p>
+<p>Segundo a resposta defendida por <strong>John Searle</strong>, a resposta é um categórico <strong>NÃO</strong>. Para Searle, o operador dentro da sala apenas aprendeu a <strong>manipular símbolos formais</strong> seguindo um livro de regras, sem compreender o significado real de uma única palavra que recebeu ou devolveu.</p>
+<h4 id="sintaxe-vs-semantica-ia-fraca-vs-ia-forte">⚖️ Sintaxe vs. Semântica (IA Fraca vs. IA Forte)</h4>
+<p>Com o experimento da Sala Chinesa, John Searle sustenta que executar um programa de computador — por mais sofisticado que seja — nunca gera compreensão ou consciência por si só, dividindo a discussão em dois conceitos:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Sintaxe (Manipulação de Símbolos — IA Fraca)</label><label for="__tabbed_4_2">Semântica (Significado e Consciência — IA Forte)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li><strong>O que é:</strong> A capacidade de processar entradas e gerar saídas corretas seguindo regras matemáticas, lógicas ou estatísticas.</li>
+<li><strong>Na prática (O que existe hoje):</strong> É onde estão todos os modelos atuais (OpenCV, YOLO, LLMs e Agentes). O sistema simula um comportamento inteligente com extrema eficiência, mas apenas manipula padrões matemáticos sem saber o que eles significam no mundo real.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li><strong>O que é:</strong> Ter compreensão real do significado das coisas, intencionalidade e experiência subjetiva (consciência de existir, sentir e compreender conceitos).</li>
+<li><strong>Na visão de Searle:</strong> A mera execução de regras sintáticas <strong>não produz semântica</strong>. A máquina não "sabe" o que é um ser humano, um perigo ou um sentimento; ela apenas calcula probabilidades.</li>
+</ul>
+</div>
+</div>
+</div>
+<h4 id="o-que-isso-significa-para-a-visao-computacional-e-os-agentes">🔍 O que isso significa para a Visão Computacional e os Agentes?</h4>
+<ul>
+<li><strong>No YOLO:</strong> Quando o modelo detecta <code>person (94%)</code>, ele não sabe o que é uma pessoa nem tem consciência de estar olhando para uma vida humana. Para a rede neural, a foto é apenas uma grade de números (<span class="arithmatex">\(0\)</span> a <span class="arithmatex">\(255\)</span>) que, multiplicada por milhões de pesos matemáticos, ativou um rótulo no final da conta.</li>
+<li><strong>Nos Agentes e LLMs:</strong> Quando um agente escolhe chamar a ferramenta <code>enviar_alerta()</code>, ele opera exatamente como o habitante da <strong>Sala Chinesa de Searle</strong>: cruza entradas com regras ou probabilidades estatísticas de forma brilhante, mas <strong>não tem consciência, desejos próprios nem bom senso humano</strong>.</li>
+</ul>
+<blockquote>
+<p><strong>💡 Lição prática para engenheiros e desenvolvedores:</strong>
+Entender o argumento de John Searle na Sala Chinesa evita dois erros comuns: achar que a IA tem "vontade própria" (como nos filmes de ficção) ou confiar cegamente nas decisões de um agente achando que ele "entende" o contexto humano. <strong>A IA é uma ferramenta matemática poderosa, mas a consciência, a ética e a responsabilidade final pelas decisões são sempre nossas!</strong></p>
+</blockquote>
+<hr />
+<h3 id="6-proximos-passos-continue-sua-jornada">🚀 6. Próximos Passos: Continue sua Jornada!</h3>
+<hr />
+<p>Chegamos ao fim do nosso <strong>BootCamp de Visão Computacional + IA na Prática</strong>, mas este é apenas o começo da sua caminhada! Se você gostou de construir soluções com processamento de imagens, redes neurais e agentes inteligentes, veja como continuar evoluindo dentro da <strong>UFRN</strong>:</p>
+<h4 id="disciplinas-na-escola-de-ciencias-e-tecnologia-ect-ufrn">🎓 Disciplinas na Escola de Ciências e Tecnologia (ECT - UFRN)</h4>
+<p>Na <strong>Escola de Ciências e Tecnologia (ECT/UFRN)</strong>, você pode cursar disciplinas que aprofundam toda a base matemática, teórica e prática dos temas que exploramos nestes três dias (com materiais abertos também disponíveis no portal do <a href="https://heltonmaia.com/">Prof. Helton Maia</a>):</p>
+<ul>
+<li><strong>📊 Aprendizado de Máquina (<em>Machine Learning</em>):</strong>
+  Construa a base essencial da Inteligência Artificial moderna. Você aprenderá como algoritmos extraem padrões de dados usando Python — passando por análise exploratória, regressão, classificação, agrupamento (<em>clustering</em>), árvores de decisão e avaliação rigorosa de modelos.</li>
+<li><strong>🧠 Aprendizado Profundo (<em>Deep Learning</em> — <code>ECT3695</code>):</strong>
+  Mergulhe no funcionamento interno das Redes Neurais Artificiais! A disciplina aborda desde o neurônio matemático e o algoritmo de <em>Backpropagation</em> até Redes Neurais Convolucionais (CNNs), arquiteturas modernas, <em>Transfer Learning</em> e implementação prática de modelos profundos.</li>
+<li><strong>👁️ Visão Computacional (<code>ECT3709</code>):</strong>
+  Aprofunde tudo o que vimos no minicurso! Conecta os fundamentos matemáticos do Processamento Digital de Imagens (filtros, morfologia, transformadas e representação de cores) com o estado da arte em redes neurais aplicadas à visão (detecção de objetos com YOLO, segmentação, rastreamento e análise de vídeo em tempo real).</li>
+</ul>
+<h4 id="estude-e-desenvolva-projetos-no-laboratorio-de-robotica-e-automacao-ect-ufrn">🤖 Estude e Desenvolva Projetos no Laboratório de Robótica e Automação (ECT - UFRN)</h4>
+<p>Quer ir além da tela do computador e ver seus algoritmos ganhando vida no mundo físico?</p>
+<p>O <strong>Laboratório de Robótica e Automação (ECT - UFRN)</strong> está disponível para estudantes que desejam <strong>estudar, praticar e desenvolver projetos</strong> nas áreas de:</p>
+<ul>
+<li><strong>Visão Computacional e Inteligência Artificial Aplicada;</strong></li>
+<li><strong>Robótica Móvel, Sistemas Embarcados e Automação;</strong></li>
+<li><strong>Pesquisa científica, projetos de extensão e desenvolvimento de protótipos.</strong></li>
+</ul>
+<p>Participar de um laboratório é uma das melhores experiências da universidade: você trabalha em equipe, aprende na prática com problemas reais, troca conhecimentos com veteranos e professores e constrói um portfólio sólido ainda durante a graduação!</p>
+<hr />
+<h3 id="para-ir-mais-a-fundo">💭 Para ir mais a fundo...</h3>
+<hr />
+<h4 id="materiais-e-artigos-sugeridos">📚 Materiais e artigos sugeridos</h4>
+<ul>
+<li><a href="https://heltonmaia.com/computervision/intro.html" target="_blank">Prof. Helton Maia — Material de Visão Computacional</a></li>
+<li><a href="https://heltonmaia.com/playground/imagem.html?aba=equalizacao" target="_blank">Prof. Helton Maia — Playground Interativo de Processamento de Imagens</a></li>
+<li><a href="https://arxiv.org/html/2506.12469v1" target="_blank">Levels of Autonomy for AI Agents — Working Paper (arXiv)</a></li>
+<li><a href="https://modelcontextprotocol.io/" target="_blank">Documentação Oficial do Model Context Protocol (MCP)</a></li>
+<li><a href="https://core.telegram.org/bots/api" target="_blank">Documentação Oficial da Telegram Bot API</a></li>
+</ul>
+<h4 id="prompts-para-estudar-com-llms">🤖 Prompts para estudar com LLMs</h4>
+<p>Copie e cole os prompts abaixo no seu assistente de IA favorito para aprofundar os conceitos vistos na aula:</p>
+<ol>
+<li>
+<p><strong>Arquitetura de Agentes de Visão (Regras vs. LLMs):</strong></p>
+<blockquote>
+<p><em>"Explique a diferença entre um pipeline tradicional de Visão Computacional (que apenas executa um modelo como YOLO) e um Agente de Visão (Vision Agent) que segue o ciclo Observação → Interpretação → Decisão → Ação. Compare quando vale a pena usar uma política de decisão baseada em regras determinísticas em Python e quando vale a pena usar um LLM como planejador."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Model Context Protocol (MCP) na Prática:</strong></p>
+<blockquote>
+<p><em>"Explique de forma didática o que é o Model Context Protocol (MCP), qual problema ele resolve no desenvolvimento de agentes de IA e qual é o papel do Host, do Cliente MCP e do Servidor MCP. Mostre um exemplo simples em Python usando FastMCP expondo duas ferramentas."</em></p>
+</blockquote>
+</li>
+<li>
+<p><strong>Integrando Visão Computacional com Bot do Telegram:</strong></p>
+<blockquote>
+<p><em>"Como criar um bot no Telegram usando o @BotFather, obter o Token e o Chat ID, e enviar tanto mensagens de texto quanto imagens anotadas pelo OpenCV/YOLO em Python usando a biblioteca requests? Mostre o código passo a passo e explique boas práticas para evitar enviar múltiplos alertas repetidos em vídeos."</em></p>
+</blockquote>
+</li>
+</ol>
+<hr />
+<h3 id="avaliacao-do-minicurso">📝 Avaliação do Minicurso</h3>
+<hr />
+<p>Sua opinião é fundamental para melhorarmos as próximas edições! Por favor, reserve um minuto para responder ao formulário de avaliação do minicurso:</p>
+<p style="text-align: center; margin-top: 24px;">
+<a style="font-size:2vh; background-color: #06e4d9 !important; padding: 10px 18px; border-radius: 6px; color: #000; font-weight: bold; text-decoration: none;" href="https://docs.google.com/forms/d/e/1FAIpQLScTE2CBs1sFmp4vstwd9GpI1_JE6xj0tbbvTQc2HzCcdCVX7g/viewform" target="_blank">Clique aqui para responder ao Formulário de Avaliação</a>
+</p></p>
+    </article>
+
+    
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../dia02/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../contatos/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+    <small class="d-block mb-3">Desenvolvido por Marcos Aurélio Tavares Filho.</small>
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+
+</body>
+
+</html>
