@@ -29,7 +29,7 @@
     <div style="margin-left: 2vw; padding-top: 5vh;">
         <p>João Victor Evangelista</p>
         <ul> > Monitor.</ul>
-        <ul> > Email: <a href="mailto:">PREENCHER. </a></ul>
+        <ul> > Email: <a href="mailto:vitor.silva.118@ufrn.edu.br">vitor.silva.118@ufrn.edu.br</a></ul>
         <ul> > LinkedIn: <a href="https://www.linkedin.com/in/jo%C3%A3o-vitor-evangelista-b22a73180/" target="_blank">João Vitor Evangelista.</a></ul>
     </div>
 </div>
